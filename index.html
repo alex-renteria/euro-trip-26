@@ -40,7 +40,7 @@ body {
   color: var(--ink);
   font-family: 'Outfit', sans-serif;
   font-weight: 300;
-  font-size: 15px;
+  font-size: 17px;
   line-height: 1.6;
 }
 
@@ -527,14 +527,14 @@ body {
 .b-split   { background: var(--amber-bg);  color: var(--amber);  }
 
 .d-title {
-  font-size: 15px;
+  font-size: 17px;
   font-weight: 500;
   color: var(--ink);
   line-height: 1.4;
 }
 
 .d-desc {
-  font-size: 13.5px;
+  font-size: 15px;
   color: var(--ink-mid);
   line-height: 1.7;
   font-weight: 300;
@@ -709,6 +709,48 @@ body {
   gap: 8px;
 }
 
+/* ── STATUS STRIP ── */
+.status-strip {
+  background: #111009;
+  border-bottom: 1px solid rgba(255,255,255,.06);
+  display: flex;
+  margin-left: 0;
+}
+
+.status-card {
+  flex: 1;
+  padding: 1.1rem 2rem;
+  border-right: 1px solid rgba(255,255,255,.07);
+  text-align: center;
+}
+
+.status-card:last-child { border-right: none; }
+
+.st-label {
+  font-family: 'DM Mono', monospace;
+  font-size: 9px;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+  color: rgba(245,240,232,.28);
+  margin-bottom: 7px;
+}
+
+.st-val {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 30px;
+  font-weight: 300;
+  color: rgba(245,240,232,.88);
+  line-height: 1;
+}
+
+.st-sub {
+  font-family: 'DM Mono', monospace;
+  font-size: 9.5px;
+  color: rgba(245,240,232,.33);
+  margin-top: 6px;
+  letter-spacing: .04em;
+}
+
 /* ── MOBILE ── */
 @media (max-width: 768px) {
   :root { --sidebar-w: 0px; }
@@ -719,6 +761,9 @@ body {
   .log-grid { grid-template-columns: 1fr; }
   .log-item { border-right: none !important; }
   .log-item:last-child { border-bottom: none; }
+  .status-strip { flex-direction: column; }
+  .status-card { border-right: none; border-bottom: 1px solid rgba(255,255,255,.07); padding: .8rem 1.25rem; }
+  .status-card:last-child { border-bottom: none; }
 }
 </style>
 </head>
@@ -824,6 +869,25 @@ body {
       <span class="pill"><strong>Fly home</strong> Sat Jul 25</span>
       <span class="pill"><strong>Home</strong> Mon Jul 27</span>
     </div>
+  </div>
+</div>
+
+<!-- STATUS STRIP -->
+<div class="status-strip">
+  <div class="status-card">
+    <div class="st-label">Today</div>
+    <div class="st-val" id="st-date">—</div>
+    <div class="st-sub" id="st-day">—</div>
+  </div>
+  <div class="status-card">
+    <div class="st-label">Where we are</div>
+    <div class="st-val" id="st-place">—</div>
+    <div class="st-sub" id="st-base">—</div>
+  </div>
+  <div class="status-card">
+    <div class="st-label" id="st-count-label">Days to next move</div>
+    <div class="st-val" id="st-count">—</div>
+    <div class="st-sub" id="st-count-sub">—</div>
   </div>
 </div>
 
@@ -1364,6 +1428,77 @@ const observer = new IntersectionObserver((entries) => {
 }, { threshold: 0.3 });
 
 document.querySelectorAll('.base[id]').forEach(el => observer.observe(el));
+
+// ── STATUS STRIP ──
+(function() {
+  const BASES = [
+    { name: 'Glockenalm', place: 'Bavaria · Germany', checkin: '2026-07-04', checkout: '2026-07-05' },
+    { name: 'ibis Bad Reichenhall', place: 'Bad Reichenhall · Germany', checkin: '2026-07-05', checkout: '2026-07-07' },
+    { name: 'Hotel St George', place: 'Zell am See · Austria', checkin: '2026-07-07', checkout: '2026-07-10' },
+    { name: 'Wedding Venue', place: 'Pfronten · Germany', checkin: '2026-07-10', checkout: '2026-07-15' },
+    { name: 'B&B River Inn', place: 'St. Moritz · Switzerland', checkin: '2026-07-15', checkout: '2026-07-16' },
+    { name: 'Bernina View', place: 'Tirano · Italy', checkin: '2026-07-16', checkout: '2026-07-17' },
+    { name: 'St. Vigilhof', place: 'Nalles · Italy', checkin: '2026-07-17', checkout: '2026-07-18' },
+    { name: 'Chalet Vicino al Bosco', place: 'Villanova · Dolomites', checkin: '2026-07-18', checkout: '2026-07-23' },
+    { name: "Emma's House", place: 'Munich · Germany', checkin: '2026-07-23', checkout: '2026-07-25' },
+    { name: 'Hyatt Regency', place: 'Bangkok · Thailand', checkin: '2026-07-26', checkout: '2026-07-27' },
+  ].map(b => ({ ...b, checkin: new Date(b.checkin), checkout: new Date(b.checkout) }));
+
+  const DEPART = new Date('2026-07-03');
+  const TRANSIT_OUT = new Date('2026-07-03');
+  const HOME = new Date('2026-07-27');
+
+  const DAYS = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
+  const MONTHS = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+
+  const today = new Date();
+  today.setHours(0, 0, 0, 0);
+
+  const $ = id => document.getElementById(id);
+  $('st-date').textContent = today.getDate() + ' ' + MONTHS[today.getMonth()];
+  $('st-day').textContent = DAYS[today.getDay()];
+
+  function daysBetween(a, b) {
+    return Math.ceil((b - a) / 86400000);
+  }
+
+  if (today < DEPART) {
+    const d = daysBetween(today, DEPART);
+    $('st-place').textContent = 'Melbourne';
+    $('st-base').textContent = 'Home · pre-trip';
+    $('st-count-label').textContent = 'Days to departure';
+    $('st-count').textContent = d;
+    $('st-count-sub').textContent = 'Fri 3 Jul · wheels up';
+  } else if (today.getTime() === TRANSIT_OUT.getTime()) {
+    $('st-place').textContent = 'In transit';
+    $('st-base').textContent = 'MEL → BKK → MUC';
+    $('st-count-label').textContent = 'Departure day';
+    $('st-count').textContent = '✈';
+    $('st-count-sub').textContent = 'Safe travels!';
+  } else if (today >= HOME) {
+    $('st-place').textContent = 'Melbourne';
+    $('st-base').textContent = 'Home · trip complete';
+    $('st-count-label').textContent = 'Trip';
+    $('st-count').textContent = '✓';
+    $('st-count-sub').textContent = '21 nights · 5 countries';
+  } else {
+    const cur = BASES.find(b => today >= b.checkin && today < b.checkout);
+    if (cur) {
+      const left = daysBetween(today, cur.checkout);
+      $('st-place').textContent = cur.place;
+      $('st-base').textContent = cur.name;
+      $('st-count-label').textContent = left === 1 ? 'Moving tomorrow' : 'Nights left here';
+      $('st-count').textContent = left;
+      $('st-count-sub').textContent = left === 1 ? 'Last night here' : 'then next base';
+    } else {
+      $('st-place').textContent = 'In transit';
+      $('st-base').textContent = 'Travel day';
+      $('st-count-label').textContent = 'On the move';
+      $('st-count').textContent = '🚗';
+      $('st-count-sub').textContent = 'Drive or fly day';
+    }
+  }
+})();
 </script>
 </body>
 </html>
