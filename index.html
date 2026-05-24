@@ -1521,10 +1521,11 @@ document.querySelectorAll('.base[id]').forEach(el => observer.observe(el));
   ROUTE.forEach((stop, i) => {
     const isHere = i === hereIdx;
     const isNext = i === nextIdx;
-    const isPast = onTrip && today >= stop.checkout;
-    const num = i + 1;
+    const isPast   = onTrip && today >= stop.checkout;
+    const isFuture = onTrip && !isHere && !isNext && !isPast;
+    const num  = i + 1;
     const size = isHere ? 26 : 22;
-    const opacity = isPast ? 0.38 : 1;
+    const opacity = isPast ? 0.35 : isFuture ? 0.6 : 1;
     const extraClass = isHere ? 'marker-num-here' : '';
     const fontSize = size <= 22 ? '10px' : '11px';
 
