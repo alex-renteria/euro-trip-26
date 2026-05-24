@@ -1,0 +1,1369 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Europe Summer 2026 · Family Trip</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Mono:wght@300;400;500&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --ink: #18160F;
+  --ink-mid: #4A4840;
+  --ink-light: #7A7870;
+  --ink-faint: #B0AEA8;
+  --cream: #F5F0E8;
+  --cream-dark: #EDE7DB;
+  --rule: #D8D2C6;
+  --white: #FDFBF7;
+  --green: #2A5C45;
+  --green-bg: #EBF2ED;
+  --blue: #1E3F6B;
+  --blue-bg: #E8EFF7;
+  --amber: #7A4E10;
+  --amber-bg: #F5EAD5;
+  --red: #7A1E1E;
+  --red-bg: #F5E8E8;
+  --purple: #3D2D70;
+  --purple-bg: #ECEAF5;
+  --teal: #1A5C5C;
+  --teal-bg: #E4F0F0;
+  --gold: #B8860B;
+  --sidebar-w: 280px;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--cream);
+  color: var(--ink);
+  font-family: 'Outfit', sans-serif;
+  font-weight: 300;
+  font-size: 15px;
+  line-height: 1.6;
+}
+
+/* ── LAYOUT ── */
+.layout {
+  min-height: 100vh;
+}
+
+/* ── SIDEBAR ── */
+.sidebar {
+  position: fixed;
+  top: 0; left: 0;
+  width: var(--sidebar-w);
+  height: 100vh;
+  background: var(--ink);
+  overflow-y: auto;
+  z-index: 100;
+  display: flex;
+  flex-direction: column;
+}
+
+.sidebar::-webkit-scrollbar { width: 3px; }
+.sidebar::-webkit-scrollbar-thumb { background: rgba(255,255,255,.1); border-radius: 2px; }
+
+.sidebar-logo {
+  padding: 1.75rem 1.5rem 1.25rem;
+  border-bottom: 1px solid rgba(255,255,255,.07);
+}
+
+.sidebar-logo-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 20px;
+  font-weight: 300;
+  color: rgba(245,240,232,.9);
+  line-height: 1.2;
+}
+
+.sidebar-logo-title em { font-style: italic; color: rgba(184,134,11,.7); }
+
+.sidebar-logo-sub {
+  font-family: 'DM Mono', monospace;
+  font-size: 9px;
+  letter-spacing: .14em;
+  color: rgba(245,240,232,.3);
+  margin-top: 5px;
+  text-transform: uppercase;
+}
+
+.sidebar-stats {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 0;
+  border-bottom: 1px solid rgba(255,255,255,.07);
+}
+
+.sb-stat {
+  padding: .875rem .75rem;
+  text-align: center;
+  border-right: 1px solid rgba(255,255,255,.07);
+}
+
+.sb-stat:last-child { border-right: none; }
+
+.sb-stat-num {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 24px;
+  font-weight: 300;
+  color: rgba(245,240,232,.85);
+  line-height: 1;
+}
+
+.sb-stat-label {
+  font-family: 'DM Mono', monospace;
+  font-size: 8px;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: rgba(245,240,232,.28);
+  margin-top: 3px;
+}
+
+.sidebar-nav {
+  padding: .875rem 0;
+  flex: 1;
+}
+
+.nav-section-label {
+  font-family: 'DM Mono', monospace;
+  font-size: 8px;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+  color: rgba(245,240,232,.22);
+  padding: .625rem 1.5rem .35rem;
+}
+
+.nav-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: .55rem 1.5rem;
+  cursor: pointer;
+  transition: background .15s;
+  text-decoration: none;
+  border: none;
+  background: none;
+  width: 100%;
+  text-align: left;
+}
+
+.nav-item:hover { background: rgba(255,255,255,.06); }
+.nav-item.active { background: rgba(255,255,255,.1); }
+
+.nav-dot {
+  width: 8px; height: 8px;
+  border-radius: 50%;
+  border: 1.5px solid;
+  flex-shrink: 0;
+}
+
+.nav-text {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  flex: 1;
+}
+
+.nav-name {
+  font-size: 13px;
+  font-weight: 400;
+  color: rgba(245,240,232,.75);
+  line-height: 1.3;
+}
+
+.nav-dates {
+  font-family: 'DM Mono', monospace;
+  font-size: 9px;
+  color: rgba(245,240,232,.28);
+  letter-spacing: .04em;
+}
+
+.sidebar-map-btn {
+  margin: .875rem 1.25rem 1.25rem;
+  padding: .7rem 1rem;
+  background: rgba(184,134,11,.15);
+  border: 1px solid rgba(184,134,11,.3);
+  border-radius: 10px;
+  color: rgba(184,134,11,.85);
+  font-family: 'DM Mono', monospace;
+  font-size: 10px;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: all .2s;
+  text-align: center;
+  display: block;
+  text-decoration: none;
+}
+
+.sidebar-map-btn:hover { background: rgba(184,134,11,.25); }
+
+/* ── MAIN ── */
+.main {
+  margin-left: var(--sidebar-w);
+}
+
+/* ── HEADER ── */
+.header {
+  background: var(--ink);
+  color: var(--cream);
+  padding: 4rem 3.5rem 3.5rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.header-bg {
+  position: absolute; inset: 0;
+  background:
+    radial-gradient(ellipse 50% 70% at 90% 15%, rgba(184,134,11,.14) 0%, transparent 60%),
+    radial-gradient(ellipse 40% 50% at 5% 85%, rgba(30,63,107,.22) 0%, transparent 50%);
+}
+
+.header-inner { position: relative; max-width: 800px; }
+
+.header-eyebrow {
+  font-family: 'DM Mono', monospace;
+  font-size: 10px;
+  letter-spacing: .22em;
+  text-transform: uppercase;
+  color: rgba(245,240,232,.35);
+  margin-bottom: 1.25rem;
+}
+
+.header h1 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(42px, 5vw, 64px);
+  font-weight: 300;
+  line-height: 1.08;
+  letter-spacing: -.01em;
+  margin-bottom: .75rem;
+}
+
+.header h1 em { font-style: italic; color: rgba(184,134,11,.65); }
+
+.header-sub {
+  font-size: 15px;
+  color: rgba(245,240,232,.42);
+  margin-bottom: 2.5rem;
+  letter-spacing: .03em;
+}
+
+.header-pills { display: flex; flex-wrap: wrap; gap: 8px; }
+
+.pill {
+  font-family: 'DM Mono', monospace;
+  font-size: 10px;
+  letter-spacing: .06em;
+  padding: 5px 13px;
+  border: 1px solid rgba(245,240,232,.14);
+  border-radius: 999px;
+  color: rgba(245,240,232,.48);
+}
+
+.pill strong { color: rgba(245,240,232,.82); font-weight: 500; }
+
+/* ── MAP SECTION ── */
+#map-section {
+  background: var(--white);
+  border-bottom: 1px solid var(--rule);
+  padding: 2.5rem 3.5rem;
+}
+
+.map-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 22px;
+  font-weight: 400;
+  margin-bottom: 1.25rem;
+  color: var(--ink);
+}
+
+.map-container {
+  position: relative;
+  width: 100%;
+  height: 520px;
+  border-radius: 14px;
+  overflow: hidden;
+  border: 1px solid var(--rule);
+  background: #e8e0d4;
+}
+
+.map-container iframe {
+  width: 100%;
+  height: 100%;
+  border: none;
+}
+
+.map-legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 1rem;
+}
+
+.map-leg-item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-family: 'DM Mono', monospace;
+  font-size: 10px;
+  color: var(--ink-mid);
+  letter-spacing: .04em;
+}
+
+.map-leg-dot {
+  width: 10px; height: 10px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+/* ── CONTENT ── */
+.content {
+  padding: 2.5rem 3.5rem 5rem;
+  max-width: 900px;
+}
+
+/* ── PHASE HEADER ── */
+.phase-hdr {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin: 3.5rem 0 1.5rem;
+  scroll-margin-top: 2rem;
+}
+
+.phase-hdr:first-child { margin-top: 0; }
+
+.phase-label {
+  font-family: 'DM Mono', monospace;
+  font-size: 10px;
+  letter-spacing: .15em;
+  text-transform: uppercase;
+  color: var(--ink-faint);
+  white-space: nowrap;
+}
+
+.phase-rule { flex: 1; height: 1px; background: var(--rule); }
+
+/* ── BASE CARD ── */
+.base {
+  border: 1px solid var(--rule);
+  border-radius: 16px;
+  overflow: hidden;
+  margin-bottom: 14px;
+  background: var(--white);
+  scroll-margin-top: 2rem;
+  transition: box-shadow .2s;
+}
+
+.base:target, .base.highlighted {
+  box-shadow: 0 0 0 2.5px var(--gold);
+}
+
+.base.star { border-color: var(--gold); border-width: 1.5px; }
+.base.wedding-base { border-color: var(--red); border-width: 1.5px; }
+
+.base-hdr {
+  display: grid;
+  grid-template-columns: 44px 1fr auto;
+  align-items: center;
+  gap: 14px;
+  padding: 1.125rem 1.5rem;
+  border-bottom: 1px solid var(--rule);
+  background: var(--cream-dark);
+  cursor: pointer;
+  user-select: none;
+  transition: background .15s;
+}
+
+.base-hdr:hover { background: #E5DDD0; }
+
+.b-icon {
+  width: 40px; height: 40px;
+  border-radius: 11px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'DM Mono', monospace;
+  font-size: 11px;
+  font-weight: 500;
+  flex-shrink: 0;
+  letter-spacing: .04em;
+}
+
+.b-name {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 19px;
+  font-weight: 400;
+  color: var(--ink);
+  line-height: 1.25;
+}
+
+.b-addr {
+  font-family: 'DM Mono', monospace;
+  font-size: 10px;
+  color: var(--ink-light);
+  margin-top: 3px;
+  line-height: 1.5;
+}
+
+.b-nights { text-align: right; flex-shrink: 0; }
+
+.b-nights-num {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 32px;
+  font-weight: 300;
+  line-height: 1;
+  color: var(--ink);
+}
+
+.b-nights-label {
+  font-family: 'DM Mono', monospace;
+  font-size: 9px;
+  letter-spacing: .08em;
+  color: var(--ink-faint);
+  text-transform: uppercase;
+}
+
+.b-toggle {
+  font-size: 13px;
+  color: var(--ink-faint);
+  margin-left: 8px;
+  transition: transform .25s;
+  display: inline-block;
+}
+
+.base.collapsed .b-toggle { transform: rotate(-90deg); }
+
+.base-body { }
+.base.collapsed .base-body { display: none; }
+
+/* ── DAY ROW ── */
+.day {
+  display: grid;
+  grid-template-columns: 70px 1fr;
+  border-bottom: 1px solid var(--rule);
+}
+
+.day:last-child { border-bottom: none; }
+.day.wed-day { background: #FFF6F6; }
+.day.transit-day { background: #F8F7FD; }
+.day.lakes-day { background: #F5FAFA; }
+.day.train-day { background: #F5F8F2; }
+.day.split-day { background: #FDFAF4; }
+
+.day-left {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 1rem .5rem;
+  border-right: 1px solid var(--rule);
+  background: rgba(245,240,232,.5);
+}
+
+.day.wed-day .day-left { background: rgba(245,232,232,.6); }
+.day.transit-day .day-left { background: rgba(236,234,245,.6); }
+.day.lakes-day .day-left { background: rgba(228,240,240,.5); }
+.day.train-day .day-left { background: rgba(235,242,237,.5); }
+.day.split-day .day-left { background: rgba(245,234,213,.4); }
+
+.d-num {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 24px;
+  font-weight: 400;
+  line-height: 1;
+  color: var(--ink);
+}
+
+.d-mon {
+  font-family: 'DM Mono', monospace;
+  font-size: 9px;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  color: var(--ink-faint);
+  margin-top: 2px;
+}
+
+.d-wd {
+  font-family: 'DM Mono', monospace;
+  font-size: 8.5px;
+  color: var(--ink-faint);
+  margin-top: 1px;
+}
+
+.day-right {
+  padding: .9rem 1.4rem;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+/* ── BADGES ── */
+.badge {
+  display: inline-flex;
+  align-items: center;
+  font-family: 'DM Mono', monospace;
+  font-size: 9px;
+  letter-spacing: .09em;
+  text-transform: uppercase;
+  padding: 3px 10px;
+  border-radius: 999px;
+  align-self: flex-start;
+  line-height: 1.7;
+  font-weight: 500;
+}
+
+.b-arrive  { background: var(--blue-bg);   color: var(--blue);   }
+.b-base    { background: var(--green-bg);  color: var(--green);  }
+.b-drive   { background: var(--amber-bg);  color: var(--amber);  }
+.b-trip    { background: var(--amber-bg);  color: var(--amber);  }
+.b-wedding { background: var(--red-bg);    color: var(--red);    }
+.b-group   { background: var(--teal-bg);   color: var(--teal);   }
+.b-fly     { background: var(--purple-bg); color: var(--purple); }
+.b-train   { background: var(--green-bg);  color: var(--green);  }
+.b-lakes   { background: var(--teal-bg);   color: var(--teal);   }
+.b-split   { background: var(--amber-bg);  color: var(--amber);  }
+
+.d-title {
+  font-size: 15px;
+  font-weight: 500;
+  color: var(--ink);
+  line-height: 1.4;
+}
+
+.d-desc {
+  font-size: 13.5px;
+  color: var(--ink-mid);
+  line-height: 1.7;
+  font-weight: 300;
+}
+
+.d-addr {
+  font-family: 'DM Mono', monospace;
+  font-size: 10px;
+  color: var(--ink-faint);
+  line-height: 1.5;
+}
+
+.drive-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-family: 'DM Mono', monospace;
+  font-size: 10px;
+  color: var(--amber);
+  background: var(--amber-bg);
+  padding: 3px 11px;
+  border-radius: 999px;
+  align-self: flex-start;
+  margin-top: 2px;
+}
+
+.drive-tag.fly { color: var(--purple); background: var(--purple-bg); }
+.drive-tag.train { color: var(--green); background: var(--green-bg); }
+
+.hls {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+  margin-top: 3px;
+}
+
+.hl {
+  font-size: 11.5px;
+  color: var(--ink-mid);
+  background: var(--cream-dark);
+  border: 1px solid var(--rule);
+  padding: 2px 9px;
+  border-radius: 999px;
+  font-weight: 300;
+}
+
+.hl.lake { background: var(--teal-bg); border-color: #A8D0D0; color: var(--teal); }
+.hl.star { background: var(--amber-bg); border-color: #D4B070; color: var(--amber); }
+
+.note-box {
+  border-left: 3px solid var(--teal);
+  background: var(--teal-bg);
+  padding: .7rem 1rem;
+  border-radius: 0 9px 9px 0;
+  font-size: 12.5px;
+  color: var(--teal);
+  line-height: 1.65;
+  margin-top: 4px;
+}
+
+.note-box.amber { border-color: var(--gold); background: var(--amber-bg); color: var(--amber); }
+
+.note-box strong {
+  font-family: 'DM Mono', monospace;
+  font-size: 9px;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  display: block;
+  margin-bottom: 3px;
+  font-weight: 500;
+}
+
+/* ── SUMMARY ── */
+.summary {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 10px;
+  margin-top: 3.5rem;
+  padding-top: 2.5rem;
+  border-top: 1px solid var(--rule);
+}
+
+.s-card {
+  background: var(--white);
+  border: 1px solid var(--rule);
+  border-radius: 13px;
+  padding: 1.125rem 1rem;
+  text-align: center;
+}
+
+.s-label {
+  font-family: 'DM Mono', monospace;
+  font-size: 8.5px;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: var(--ink-faint);
+  margin-bottom: 6px;
+}
+
+.s-val {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 32px;
+  font-weight: 300;
+  color: var(--ink);
+  line-height: 1;
+}
+
+.s-sub {
+  font-family: 'DM Mono', monospace;
+  font-size: 8.5px;
+  color: var(--ink-faint);
+  margin-top: 4px;
+}
+
+/* ── LOGISTICS ── */
+.logistics {
+  margin-top: 2.5rem;
+  background: var(--white);
+  border: 1px solid var(--rule);
+  border-radius: 16px;
+  overflow: hidden;
+}
+
+.log-hdr {
+  padding: 1.125rem 1.5rem;
+  border-bottom: 1px solid var(--rule);
+  background: var(--cream-dark);
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 20px;
+  font-weight: 400;
+}
+
+.log-grid { display: grid; grid-template-columns: 1fr 1fr; }
+
+.log-item {
+  padding: 1.125rem 1.5rem;
+  border-bottom: 1px solid var(--rule);
+  border-right: 1px solid var(--rule);
+}
+
+.log-item:nth-child(even) { border-right: none; }
+.log-item:nth-last-child(-n+2) { border-bottom: none; }
+
+.log-label {
+  font-family: 'DM Mono', monospace;
+  font-size: 9.5px;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: var(--ink-faint);
+  margin-bottom: 5px;
+}
+
+.log-val {
+  font-size: 13px;
+  color: var(--ink-mid);
+  line-height: 1.7;
+  font-weight: 300;
+}
+
+/* ── FOOTER ── */
+.footer {
+  background: var(--ink);
+  color: rgba(245,240,232,.28);
+  padding: 1.5rem 3.5rem;
+  font-family: 'DM Mono', monospace;
+  font-size: 10px;
+  letter-spacing: .05em;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+/* ── MOBILE ── */
+@media (max-width: 768px) {
+  :root { --sidebar-w: 0px; }
+  .sidebar { display: none; }
+  .main { margin-left: 0; }
+  .header, .content, #map-section { padding: 2rem 1.25rem; }
+  .summary { grid-template-columns: repeat(3,1fr); }
+  .log-grid { grid-template-columns: 1fr; }
+  .log-item { border-right: none !important; }
+  .log-item:last-child { border-bottom: none; }
+}
+</style>
+</head>
+<body>
+
+<div class="layout">
+
+<!-- ── SIDEBAR ── -->
+<nav class="sidebar">
+  <div class="sidebar-logo">
+    <div class="sidebar-logo-title">Europe <em>&</em> Bangkok<br>Summer 2026</div>
+    <div class="sidebar-logo-sub">Alex · Hannah · Isabel · Baby</div>
+  </div>
+  <div class="sidebar-stats">
+    <div class="sb-stat"><div class="sb-stat-num">21</div><div class="sb-stat-label">nights</div></div>
+    <div class="sb-stat"><div class="sb-stat-num">5</div><div class="sb-stat-label">countries</div></div>
+    <div class="sb-stat"><div class="sb-stat-num">9</div><div class="sb-stat-label">bases</div></div>
+  </div>
+  <div class="sidebar-nav">
+
+    <div class="nav-section-label">Outbound</div>
+    <a class="nav-item" href="#base-outbound" onclick="highlight('base-outbound')">
+      <div class="nav-dot" style="border-color:#3D2D70;background:#221A42"></div>
+      <div class="nav-text"><div class="nav-name">Melbourne → Munich</div><div class="nav-dates">Fri Jul 3 – Sat Jul 4</div></div>
+    </a>
+
+    <div class="nav-section-label">Bavaria & Austrian Lakes</div>
+    <a class="nav-item" href="#base-glockenalm" onclick="highlight('base-glockenalm')">
+      <div class="nav-dot" style="border-color:#1E3F6B;background:#0F2240"></div>
+      <div class="nav-text"><div class="nav-name">Glockenalm</div><div class="nav-dates">Sat Jul 4</div></div>
+    </a>
+    <a class="nav-item" href="#base-reichenhall" onclick="highlight('base-reichenhall')">
+      <div class="nav-dot" style="border-color:#1E3F6B;background:#0F2240"></div>
+      <div class="nav-text"><div class="nav-name">ibis Bad Reichenhall</div><div class="nav-dates">Sun Jul 5 – Tue Jul 7</div></div>
+    </a>
+    <a class="nav-item" href="#base-zell" onclick="highlight('base-zell')">
+      <div class="nav-dot" style="border-color:#1A5C5C;background:#0F3535"></div>
+      <div class="nav-text"><div class="nav-name">St George · Zell am See</div><div class="nav-dates">Tue Jul 7 – Fri Jul 10</div></div>
+    </a>
+
+    <div class="nav-section-label">Wedding</div>
+    <a class="nav-item" href="#base-pfronten" onclick="highlight('base-pfronten')">
+      <div class="nav-dot" style="border-color:#7A1E1E;background:#4A1010"></div>
+      <div class="nav-text"><div class="nav-name">Wedding Venue · Pfronten</div><div class="nav-dates">Fri Jul 10 – Wed Jul 15</div></div>
+    </a>
+
+    <div class="nav-section-label">Switzerland</div>
+    <a class="nav-item" href="#base-stmoritz" onclick="highlight('base-stmoritz')">
+      <div class="nav-dot" style="border-color:#2A5C45;background:#163525"></div>
+      <div class="nav-text"><div class="nav-name">B&B River Inn · St Moritz</div><div class="nav-dates">Wed Jul 15</div></div>
+    </a>
+    <a class="nav-item" href="#base-tirano" onclick="highlight('base-tirano')">
+      <div class="nav-dot" style="border-color:#7A4E10;background:#4A2E08"></div>
+      <div class="nav-text"><div class="nav-name">Bernina View · Tirano 🚂</div><div class="nav-dates">Thu Jul 16</div></div>
+    </a>
+
+    <div class="nav-section-label">Italy · Dolomites</div>
+    <a class="nav-item" href="#base-nalles" onclick="highlight('base-nalles')">
+      <div class="nav-dot" style="border-color:#7A4E10;background:#4A2E08"></div>
+      <div class="nav-text"><div class="nav-name">St. Vigilhof · Nalles</div><div class="nav-dates">Fri Jul 17</div></div>
+    </a>
+    <a class="nav-item" href="#base-villanova" onclick="highlight('base-villanova')">
+      <div class="nav-dot" style="border-color:#B8860B;background:#6B4E07"></div>
+      <div class="nav-text"><div class="nav-name">Chalet · Villanova ⭐</div><div class="nav-dates">Sat Jul 18 – Thu Jul 23</div></div>
+    </a>
+
+    <div class="nav-section-label">Return</div>
+    <a class="nav-item" href="#base-munich" onclick="highlight('base-munich')">
+      <div class="nav-dot" style="border-color:#1E3F6B;background:#0F2240"></div>
+      <div class="nav-text"><div class="nav-name">Emma's House · Munich</div><div class="nav-dates">Thu Jul 23 – Sat Jul 25</div></div>
+    </a>
+    <a class="nav-item" href="#base-bangkok" onclick="highlight('base-bangkok')">
+      <div class="nav-dot" style="border-color:#3D2D70;background:#221A42"></div>
+      <div class="nav-text"><div class="nav-name">Hyatt · Bangkok</div><div class="nav-dates">Sun Jul 26 · 13hr layover</div></div>
+    </a>
+
+    <div class="nav-section-label">Jump to</div>
+    <a class="nav-item" href="#map-section">
+      <div class="nav-dot" style="border-color:#B8860B;background:#6B4E07"></div>
+      <div class="nav-text"><div class="nav-name">Route Map</div><div class="nav-dates">Interactive</div></div>
+    </a>
+    <a class="nav-item" href="#logistics-section">
+      <div class="nav-dot" style="border-color:#7A7870;background:#3C3B38"></div>
+      <div class="nav-text"><div class="nav-name">Key Logistics</div><div class="nav-dates">Car, flights, reminders</div></div>
+    </a>
+  </div>
+</nav>
+
+<!-- ── MAIN ── -->
+<div class="main">
+
+<div class="header">
+  <div class="header-bg"></div>
+  <div class="header-inner">
+    <div class="header-eyebrow">Family Travel · Final Itinerary</div>
+    <h1>Europe <em>&</em> Bangkok<br>Summer 2026</h1>
+    <div class="header-sub">Alex · Hannah · Isabel (3) · Baby (9mo)</div>
+    <div class="header-pills">
+      <span class="pill"><strong>Depart</strong> Fri Jul 3</span>
+      <span class="pill"><strong>Wedding</strong> Sat Jul 11, Pfronten</span>
+      <span class="pill"><strong>Bernina Express</strong> Thu Jul 16</span>
+      <span class="pill"><strong>Italy base</strong> Jul 18–23, Villanova</span>
+      <span class="pill"><strong>Fly home</strong> Sat Jul 25</span>
+      <span class="pill"><strong>Home</strong> Mon Jul 27</span>
+    </div>
+  </div>
+</div>
+
+<!-- MAP -->
+<div id="map-section">
+  <div class="map-title">Route Map</div>
+  <div class="map-container">
+    <iframe
+      src="https://www.google.com/maps/embed/v1/directions?key=AIzaSyD-9tSrke72PouQMnMX-a7eZSW0jkFMBWY&origin=Bad+Reichenhall,Germany&destination=Munich,Germany&waypoints=Zell+am+See,Austria|Pfronten,Germany|St.+Moritz,Switzerland|Tirano,Italy|Nalles,Italy|Villanova+BL,Italy&mode=driving"
+      allowfullscreen loading="lazy">
+    </iframe>
+  </div>
+  <div class="map-legend">
+    <div class="map-leg-item"><div class="map-leg-dot" style="background:#1E3F6B"></div>Bavaria (Bad Reichenhall)</div>
+    <div class="map-leg-item"><div class="map-leg-dot" style="background:#1A5C5C"></div>Zell am See</div>
+    <div class="map-leg-item"><div class="map-leg-dot" style="background:#7A1E1E"></div>Pfronten (Wedding)</div>
+    <div class="map-leg-item"><div class="map-leg-dot" style="background:#2A5C45"></div>St Moritz</div>
+    <div class="map-leg-item"><div class="map-leg-dot" style="background:#7A4E10"></div>Tirano → Nalles</div>
+    <div class="map-leg-item"><div class="map-leg-dot" style="background:#B8860B"></div>Villanova (Dolomites base)</div>
+    <div class="map-leg-item"><div class="map-leg-dot" style="background:#1E3F6B"></div>Munich (return)</div>
+  </div>
+</div>
+
+<div class="content">
+
+<!-- OUTBOUND -->
+<div class="phase-hdr"><span class="phase-label">✈ Outbound</span><div class="phase-rule"></div></div>
+
+<div class="base" id="base-outbound">
+  <div class="base-hdr" onclick="toggleBase('base-outbound')">
+    <div class="b-icon" style="background:var(--purple-bg);color:var(--purple)">✈</div>
+    <div>
+      <div class="b-name">Melbourne → Bangkok transit → Munich</div>
+      <div class="b-addr">No overnight Bangkok · arrive Munich 7:05am Sat Jul 4</div>
+    </div>
+    <div style="display:flex;align-items:center;gap:8px">
+      <div class="b-nights"><div class="b-nights-num">—</div><div class="b-nights-label">travel</div></div>
+      <span class="b-toggle">▾</span>
+    </div>
+  </div>
+  <div class="base-body">
+    <div class="day transit-day">
+      <div class="day-left"><div class="d-num">3</div><div class="d-mon">Jul</div><div class="d-wd">Fri</div></div>
+      <div class="day-right">
+        <span class="badge b-fly">Depart</span>
+        <div class="d-title">Melbourne 1:30pm → Bangkok 8pm → Munich 7:05am</div>
+        <div class="d-desc">Depart MEL 1:30pm. Arrive Bangkok 8pm. Connecting flight departs 12:50am. Arrive Munich 7:05am Saturday July 4. Transit Bangkok — no overnight, no hotel needed.</div>
+        <div class="drive-tag fly">✈ 9.5h MEL→BKK · 11h 15m BKK→MUC</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- PHASE 1 -->
+<div class="phase-hdr"><span class="phase-label">Phase 1 · Bavaria & Austrian Lakes</span><div class="phase-rule"></div></div>
+
+<div class="base" id="base-glockenalm">
+  <div class="base-hdr" onclick="toggleBase('base-glockenalm')">
+    <div class="b-icon" style="background:var(--blue-bg);color:var(--blue)">DE</div>
+    <div>
+      <div class="b-name">Glockenalm — Arrival Night</div>
+      <div class="b-addr">Bavaria · Hannah's hen's night · all together</div>
+    </div>
+    <div style="display:flex;align-items:center;gap:8px">
+      <div class="b-nights"><div class="b-nights-num">1</div><div class="b-nights-label">night · Jul 4</div></div>
+      <span class="b-toggle">▾</span>
+    </div>
+  </div>
+  <div class="base-body">
+    <div class="day">
+      <div class="day-left"><div class="d-num">4</div><div class="d-mon">Jul</div><div class="d-wd">Sat</div></div>
+      <div class="day-right">
+        <span class="badge b-arrive">Arrive</span>
+        <div class="d-title">Land Munich 7:05am · pick up hire car · drive to Glockenalm</div>
+        <div class="d-desc">Pick up hire car at MUC — SUV, 2 child seats pre-booked, cross-border AT + IT + CH confirmed in writing. Drive to Glockenalm. Settle in. Hannah's hen's night. Early night for everyone.</div>
+        <div class="drive-tag">🚗 ~1h from Munich Airport</div>
+        <div class="note-box amber"><strong>Hannah — hen's night</strong>Evening celebration. Alex holds down the fort with the kids.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="base" id="base-reichenhall">
+  <div class="base-hdr" onclick="toggleBase('base-reichenhall')">
+    <div class="b-icon" style="background:var(--blue-bg);color:var(--blue)">DE</div>
+    <div>
+      <div class="b-name">ibis Styles Bad Reichenhall</div>
+      <div class="b-addr">Ludwigstrasse 35, 83435 Bad Reichenhall · 20 min from Königssee · 30 min from Salzburg</div>
+    </div>
+    <div style="display:flex;align-items:center;gap:8px">
+      <div class="b-nights"><div class="b-nights-num">2</div><div class="b-nights-label">nights · Jul 5–7</div></div>
+      <span class="b-toggle">▾</span>
+    </div>
+  </div>
+  <div class="base-body">
+    <div class="day">
+      <div class="day-left"><div class="d-num">5</div><div class="d-mon">Jul</div><div class="d-wd">Sun</div></div>
+      <div class="day-right">
+        <span class="badge b-drive">Drive & check in</span>
+        <div class="d-title">Glockenalm → ibis Bad Reichenhall</div>
+        <div class="d-desc">Short drive to Bad Reichenhall. Check in, walk the historic spa promenade, easy lunch. Recovery day after the long-haul.</div>
+        <div class="drive-tag">🚗 Short drive</div>
+      </div>
+    </div>
+    <div class="day lakes-day">
+      <div class="day-left"><div class="d-num">6</div><div class="d-mon">Jul</div><div class="d-wd">Mon</div></div>
+      <div class="day-right">
+        <span class="badge b-lakes">Lakes day</span>
+        <div class="d-title">Königssee boat trip + Salzburg day trip</div>
+        <div class="d-desc">Morning: electric boat on the Königssee — glacial emerald lake enclosed by sheer cliffs, St Bartholomä chapel. Entirely flat and pram-perfect. Afternoon: 30 min to Salzburg — UNESCO old town, Mirabell gardens. Back for dinner.</div>
+        <div class="drive-tag">🚗 20m to Königssee · 30m to Salzburg</div>
+        <div class="hls"><span class="hl lake">Königssee boat</span><span class="hl lake">St Bartholomä</span><span class="hl">Mirabell gardens</span><span class="hl">Salzburg old town</span></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="base" id="base-zell">
+  <div class="base-hdr" onclick="toggleBase('base-zell')">
+    <div class="b-icon" style="background:var(--teal-bg);color:var(--teal)">AT</div>
+    <div>
+      <div class="b-name">Hotel St George — Zell am See</div>
+      <div class="b-addr">Zell am See, Salzburger Land, Austria · lakeside alpine town</div>
+    </div>
+    <div style="display:flex;align-items:center;gap:8px">
+      <div class="b-nights"><div class="b-nights-num">3</div><div class="b-nights-label">nights · Jul 7–10</div></div>
+      <span class="b-toggle">▾</span>
+    </div>
+  </div>
+  <div class="base-body">
+    <div class="day lakes-day">
+      <div class="day-left"><div class="d-num">7</div><div class="d-mon">Jul</div><div class="d-wd">Tue</div></div>
+      <div class="day-right">
+        <span class="badge b-drive">Drive via Hallstatt</span>
+        <div class="d-title">Bad Reichenhall → Hallstatt stop → Zell am See</div>
+        <div class="d-desc">Route via Hallstatt — Austria's most famous lake village, UNESCO World Heritage Site. Stop 1.5hrs: pastel houses, crystal water, Dachstein glacier backdrop. Continue to Zell am See for late lunch lakeside.</div>
+        <div class="drive-tag">🚗 2h 30m total via Hallstatt</div>
+        <div class="note-box"><strong>For Hannah · lakes highlight</strong>Hallstatt is the postcard lake village of Austria — the most photographed village in the Alps. Entirely flat and pram-perfect. Don't miss it.</div>
+        <div class="hls"><span class="hl lake">Hallstatt village</span><span class="hl lake">Hallstätter See</span><span class="hl lake">Zeller See arrival</span></div>
+      </div>
+    </div>
+    <div class="day lakes-day">
+      <div class="day-left"><div class="d-num">8</div><div class="d-mon">Jul</div><div class="d-wd">Wed</div></div>
+      <div class="day-right">
+        <span class="badge b-lakes">Lakes day</span>
+        <div class="d-title">Lake Zell boat cruise + swim</div>
+        <div class="d-desc">Morning breakfast boat cruise on the MS Schmittenhöhe — mountains reflected in still water. Afternoon swim at Thumersbach lido, toddler pool, shallow sections. Optional Schmittenhöhe cable car for panoramic views.</div>
+        <div class="note-box"><strong>For Hannah · lakes highlight</strong>Zell am See: crystal-clear mountain lake, ringed by the Hohe Tauern. Three lidos with toddler pools — ideal with the kids in July.</div>
+        <div class="hls"><span class="hl lake">Lake Zell boat cruise</span><span class="hl lake">Thumersbach lido</span><span class="hl">Schmittenhöhe cable car</span><span class="hl">Toddler pool</span></div>
+      </div>
+    </div>
+    <div class="day">
+      <div class="day-left"><div class="d-num">9</div><div class="d-mon">Jul</div><div class="d-wd">Thu</div></div>
+      <div class="day-right">
+        <span class="badge b-trip">Day trip</span>
+        <div class="d-title">Kitzbühel + Grossglockner or Krimml Waterfalls</div>
+        <div class="d-desc">Morning: Kitzbühel — medieval walled town, painted facades, great lunch. Afternoon: Grossglockner High Alpine Road (Austria's most dramatic drive) OR Krimml Waterfalls (Europe's highest, flat misty forest path).</div>
+        <div class="drive-tag">🚗 45m to Kitzbühel · 45–60m Grossglockner/Krimml</div>
+        <div class="hls"><span class="hl">Kitzbühel medieval town</span><span class="hl">Grossglockner Road</span><span class="hl">Krimml Falls option</span></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- PHASE 2: WEDDING -->
+<div class="phase-hdr"><span class="phase-label">Phase 2 · Wedding · Pfronten</span><div class="phase-rule"></div></div>
+
+<div class="base wedding-base" id="base-pfronten">
+  <div class="base-hdr" onclick="toggleBase('base-pfronten')">
+    <div class="b-icon" style="background:var(--red-bg);color:var(--red)">DE</div>
+    <div>
+      <div class="b-name">Wedding Venue — Pfronten im Allgäu</div>
+      <div class="b-addr">Vilstalstraße 2, 87459 Pfronten · Allgäu Alps · Bavaria</div>
+    </div>
+    <div style="display:flex;align-items:center;gap:8px">
+      <div class="b-nights"><div class="b-nights-num">5</div><div class="b-nights-label">nights · Jul 10–15</div></div>
+      <span class="b-toggle">▾</span>
+    </div>
+  </div>
+  <div class="base-body">
+    <div class="day">
+      <div class="day-left"><div class="d-num">10</div><div class="d-mon">Jul</div><div class="d-wd">Fri</div></div>
+      <div class="day-right">
+        <span class="badge b-drive">Drive & arrive</span>
+        <div class="d-title">Zell am See → Pfronten · Emma pre-meet</div>
+        <div class="d-desc">2 hr drive west. Arrive for Emma's pre-wedding gathering. Settle in. Neuschwanstein 20 min away if energy allows.</div>
+        <div class="drive-tag">🚗 2h · Zell am See → Pfronten</div>
+      </div>
+    </div>
+    <div class="day wed-day">
+      <div class="day-left"><div class="d-num">11</div><div class="d-mon">Jul</div><div class="d-wd">Sat</div></div>
+      <div class="day-right">
+        <span class="badge b-wedding">Wedding Day 🎉</span>
+        <div class="d-title">Emma's wedding — Pfronten</div>
+        <div class="d-desc">The whole reason you're here. Enjoy every single minute.</div>
+      </div>
+    </div>
+    <div class="day wed-day">
+      <div class="day-left"><div class="d-num">12</div><div class="d-mon">Jul</div><div class="d-wd">Sun</div></div>
+      <div class="day-right">
+        <span class="badge b-wedding">Wedding Brunch</span>
+        <div class="d-title">Emma's brunch</div>
+        <div class="d-desc">Morning brunch with the wedding party. Relaxed day.</div>
+      </div>
+    </div>
+    <div class="day wed-day">
+      <div class="day-left"><div class="d-num">13</div><div class="d-mon">Jul</div><div class="d-wd">Mon</div></div>
+      <div class="day-right">
+        <span class="badge b-wedding">Civil Ceremony</span>
+        <div class="d-title">Wedding civil ceremony</div>
+      </div>
+    </div>
+    <div class="day">
+      <div class="day-left"><div class="d-num">14</div><div class="d-mon">Jul</div><div class="d-wd">Tue</div></div>
+      <div class="day-right">
+        <span class="badge b-group">Group day</span>
+        <div class="d-title">Final day with Emma & friends · Allgäu</div>
+        <div class="d-desc">Last day with the wedding group. Neuschwanstein, Füssen old town, Walchensee lake, Allgäu valley drives.</div>
+        <div class="hls"><span class="hl">Neuschwanstein castle</span><span class="hl">Füssen old town</span><span class="hl lake">Walchensee lake</span><span class="hl">Allgäu valleys</span></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- PHASE 3: SWITZERLAND -->
+<div class="phase-hdr"><span class="phase-label">Phase 3 · Switzerland · Bernina Express</span><div class="phase-rule"></div></div>
+
+<div class="base" id="base-stmoritz">
+  <div class="base-hdr" onclick="toggleBase('base-stmoritz')">
+    <div class="b-icon" style="background:var(--green-bg);color:var(--green)">CH</div>
+    <div>
+      <div class="b-name">B&B River Inn — St. Moritz</div>
+      <div class="b-addr">48 Via San Gian, 7500 St. Moritz, Switzerland · Confirmation: 5286292459</div>
+    </div>
+    <div style="display:flex;align-items:center;gap:8px">
+      <div class="b-nights"><div class="b-nights-num">1</div><div class="b-nights-label">night · Jul 15</div></div>
+      <span class="b-toggle">▾</span>
+    </div>
+  </div>
+  <div class="base-body">
+    <div class="day">
+      <div class="day-left"><div class="d-num">15</div><div class="d-mon">Jul</div><div class="d-wd">Wed</div></div>
+      <div class="day-right">
+        <span class="badge b-drive">Drive day</span>
+        <div class="d-title">Checkout Pfronten → drive to St. Moritz · park car at station</div>
+        <div class="d-desc">Drive Pfronten to St Moritz via Innsbruck and the Inn Valley — easiest Alpine route, avoids technical passes. Park car at St Moritz station paid parking. Car stays here overnight and all of tomorrow. Check into B&B River Inn.</div>
+        <div class="drive-tag">🚗 ~3h 30m · Pfronten → St Moritz via Innsbruck/Landeck</div>
+        <div class="note-box amber"><strong>Car logistics — important</strong>Park at St Moritz station Jul 15 evening. Car stays here all of Jul 16. You return by regional train Jul 17 morning to collect it before driving to Nalles.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="base star" id="base-tirano">
+  <div class="base-hdr" onclick="toggleBase('base-tirano')">
+    <div class="b-icon" style="background:var(--amber-bg);color:var(--amber)">IT</div>
+    <div>
+      <div class="b-name">Bernina View Airbnb — Tirano ⭐</div>
+      <div class="b-addr">Viale Italia 101, Quinto Piano, 23037 Tirano, Italy</div>
+    </div>
+    <div style="display:flex;align-items:center;gap:8px">
+      <div class="b-nights"><div class="b-nights-num">1</div><div class="b-nights-label">night · Jul 16</div></div>
+      <span class="b-toggle">▾</span>
+    </div>
+  </div>
+  <div class="base-body">
+    <div class="day train-day">
+      <div class="day-left"><div class="d-num">16</div><div class="d-mon">Jul</div><div class="d-wd">Thu</div></div>
+      <div class="day-right">
+        <span class="badge b-train">Bernina Express 🚂</span>
+        <div class="d-title">Bernina Express · St. Moritz → Tirano · 2h 14m</div>
+        <div class="d-desc">Board the Bernina Express from St Moritz. Sit right side heading south for best views. Highlights: Morteratsch glacier · Ospizio Bernina summit 2,253m and Lago Bianco · Alp Grüm viewpoint · Poschiavo valley descent · spectacular Brusio spiral viaduct. Arrive Tirano — sun, palm trees, Italian pace. Check into Bernina View Airbnb.</div>
+        <div class="drive-tag train">🚂 Panoramic car · Seats 71,72,73 Wagon 14 · UNESCO World Heritage · 2h 14m</div>
+        <div class="hls"><span class="hl star">Morteratsch glacier</span><span class="hl star">Ospizio Bernina 2,253m</span><span class="hl star">Alp Grüm viewpoint</span><span class="hl star">Brusio spiral viaduct</span><span class="hl">Tirano sanctuary evening</span></div>
+        <div class="note-box"><strong>Train seats booked</strong>Seats 71, 72, 73 Wagon 14 · 2nd class · Alex CHF 33 · Hannah CHF 33 · Isabel free (under 6, reservation only) · Baby on lap, free</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- PHASE 4: ITALY -->
+<div class="phase-hdr"><span class="phase-label">Phase 4 · Italy · Dolomites</span><div class="phase-rule"></div></div>
+
+<div class="base" id="base-nalles">
+  <div class="base-hdr" onclick="toggleBase('base-nalles')">
+    <div class="b-icon" style="background:var(--amber-bg);color:var(--amber)">IT</div>
+    <div>
+      <div class="b-name">St. Vigilhof — Nalles</div>
+      <div class="b-addr">Via St. Vigilio 29/A, 39010 Nalles, Italy · Confirmation: 5421204510 · Checkin 2pm · Checkout 10am</div>
+    </div>
+    <div style="display:flex;align-items:center;gap:8px">
+      <div class="b-nights"><div class="b-nights-num">1</div><div class="b-nights-label">night · Jul 17</div></div>
+      <span class="b-toggle">▾</span>
+    </div>
+  </div>
+  <div class="base-body">
+    <div class="day split-day">
+      <div class="day-left"><div class="d-num">17</div><div class="d-mon">Jul</div><div class="d-wd">Fri</div></div>
+      <div class="day-right">
+        <span class="badge b-split">Train + Drive day</span>
+        <div class="d-title">Regional train Tirano → St Moritz · collect car · drive to Nalles</div>
+        <div class="d-desc">Morning: regional train Tirano → St Moritz (same scenic route, open windows). Optional stop at Poschiavo village — arcaded square, Italian-Swiss charm. Collect car at St Moritz station. Drive ~2.5hrs to Nalles, South Tyrol. Arrive for 2pm checkin at St. Vigilhof.</div>
+        <div class="drive-tag train">🚂 Regional train Tirano → St Moritz ~2h</div>
+        <div class="drive-tag">🚗 ~2h 30m · St Moritz → Nalles via Merano</div>
+        <div class="hls"><span class="hl">Poschiavo village optional</span><span class="hl">South Tyrol vineyards</span><span class="hl">Merano surrounds</span></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="base star" id="base-villanova">
+  <div class="base-hdr" onclick="toggleBase('base-villanova')">
+    <div class="b-icon" style="background:var(--amber-bg);color:var(--amber)">IT</div>
+    <div>
+      <div class="b-name">Chalet Vicino al Bosco — Villanova ⭐</div>
+      <div class="b-addr">Via La Vares, 32040 Villanova BL, Veneto · 15 min from Cortina d'Ampezzo</div>
+    </div>
+    <div style="display:flex;align-items:center;gap:8px">
+      <div class="b-nights"><div class="b-nights-num">5</div><div class="b-nights-label">nights · Jul 18–23</div></div>
+      <span class="b-toggle">▾</span>
+    </div>
+  </div>
+  <div class="base-body">
+    <div class="day">
+      <div class="day-left"><div class="d-num">18</div><div class="d-mon">Jul</div><div class="d-wd">Sat</div></div>
+      <div class="day-right">
+        <span class="badge b-drive">Drive & arrive</span>
+        <div class="d-title">Checkout Nalles 10am → drive to Villanova</div>
+        <div class="d-desc">Drive from Nalles through the Dolomites to Villanova. Mosigo lake is a short walk from the chalet. Settle in, afternoon at the lake.</div>
+        <div class="drive-tag">🚗 ~2h · Nalles → Villanova via Dolomites</div>
+        <div class="hls"><span class="hl lake">Mosigo Lake arrive</span><span class="hl">Children's playground</span></div>
+      </div>
+    </div>
+    <div class="day lakes-day">
+      <div class="day-left"><div class="d-num">19</div><div class="d-mon">Jul</div><div class="d-wd">Sun</div></div>
+      <div class="day-right">
+        <span class="badge b-base">Rest day</span>
+        <div class="d-title">Mosigo Lake · local explore · no driving</div>
+        <div class="d-desc">Morning at Mosigo Lake — flat circuit walk, playground for Isabel, café. Explore Villanova and San Vito di Cadore village (5 min). Relax and settle in properly after a big travel week.</div>
+        <div class="hls"><span class="hl lake">Mosigo Lake morning</span><span class="hl">San Vito di Cadore</span><span class="hl">Rest & settle</span></div>
+      </div>
+    </div>
+    <div class="day train-day">
+      <div class="day-left"><div class="d-num">20</div><div class="d-mon">Jul</div><div class="d-wd">Mon</div></div>
+      <div class="day-right">
+        <span class="badge b-trip">Day trip · Early start 🌅</span>
+        <div class="d-title">Lago di Braies (before 9:30am) + Cortina + Lake Misurina</div>
+        <div class="d-desc">Leave 7:30am. Arrive Lago di Braies before 9:30am — no parking restrictions, almost empty. Turquoise water, wooden boats, Dolomite peaks. Flat circuit walk, pram-perfect. Drive 30 min to Cortina for lunch. Afternoon: Lake Misurina with Tre Cime di Lavaredo reflected in still water. Back to Villanova.</div>
+        <div class="drive-tag">🚗 1h 15m to Braies · 20m → Cortina · 15m → Misurina</div>
+        <div class="note-box amber"><strong>Early start essential · leave 7:30am</strong>Braies road restrictions begin 9:30am. Arrive before then — drive straight in, no booking needed. Lake nearly empty at 8am.</div>
+        <div class="hls"><span class="hl lake">Lago di Braies 8am</span><span class="hl">Cortina d'Ampezzo lunch</span><span class="hl lake">Lake Misurina</span><span class="hl star">Tre Cime views</span></div>
+      </div>
+    </div>
+    <div class="day">
+      <div class="day-left"><div class="d-num">21</div><div class="d-mon">Jul</div><div class="d-wd">Tue</div></div>
+      <div class="day-right">
+        <span class="badge b-trip">Day trip</span>
+        <div class="d-title">Ortisei · Alpe di Siusi · Secëda</div>
+        <div class="d-desc">35 min drive to Ortisei. Gondola up to Alpe di Siusi — Europe's largest high-altitude alpine plateau, July wildflowers at peak bloom, flat pram-friendly meadow walks. Secëda cable car for the iconic dramatic ridge. Classic Val Gardena day. Both kids ride lifts free.</div>
+        <div class="drive-tag">🚗 35m each way · Villanova → Ortisei</div>
+        <div class="hls"><span class="hl star">Alpe di Siusi gondola</span><span class="hl star">Secëda ridge</span><span class="hl">July wildflowers</span><span class="hl">Ladin lunch Ortisei</span></div>
+      </div>
+    </div>
+    <div class="day">
+      <div class="day-left"><div class="d-num">22</div><div class="d-mon">Jul</div><div class="d-wd">Wed</div></div>
+      <div class="day-right">
+        <span class="badge b-base">Free day</span>
+        <div class="d-title">Val di Cadore · rest · Mosigo lake</div>
+        <div class="d-desc">No agenda. Morning at Mosigo Lake, afternoon exploring the Val di Cadore valley, or simply rest at the chalet. Optional Valle di Zoldo scenic valley drive. Last evening in the Dolomites.</div>
+        <div class="hls"><span class="hl lake">Mosigo Lake</span><span class="hl">Valle di Zoldo option</span><span class="hl">Last Dolomites evening</span></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- PHASE 5: RETURN -->
+<div class="phase-hdr"><span class="phase-label">Phase 5 · Return to Munich</span><div class="phase-rule"></div></div>
+
+<div class="base" id="base-munich">
+  <div class="base-hdr" onclick="toggleBase('base-munich')">
+    <div class="b-icon" style="background:var(--blue-bg);color:var(--blue)">DE</div>
+    <div>
+      <div class="b-name">Emma's House — Munich</div>
+      <div class="b-addr">Ainmillerstraße 27, 80801 München · car parked: Galeria München</div>
+    </div>
+    <div style="display:flex;align-items:center;gap:8px">
+      <div class="b-nights"><div class="b-nights-num">2</div><div class="b-nights-label">nights · Jul 23–25</div></div>
+      <span class="b-toggle">▾</span>
+    </div>
+  </div>
+  <div class="base-body">
+    <div class="day">
+      <div class="day-left"><div class="d-num">23</div><div class="d-mon">Jul</div><div class="d-wd">Thu</div></div>
+      <div class="day-right">
+        <span class="badge b-drive">Drive day</span>
+        <div class="d-title">Villanova → lunch Innsbruck → Munich · park at Galeria</div>
+        <div class="d-desc">Checkout Villanova. Drive north through Dolomites and Brenner Pass. Lunch stop in Innsbruck — great break point, 1hr into the drive. Continue to Munich, park car at Galeria München (walking distance from Emma's). Settle in for the final nights.</div>
+        <div class="drive-tag">🚗 4.5h total · Villanova → Innsbruck lunch → Munich</div>
+        <div class="hls"><span class="hl">Innsbruck lunch stop</span><span class="hl">Brenner Pass</span><span class="hl">Park at Galeria München</span></div>
+      </div>
+    </div>
+    <div class="day">
+      <div class="day-left"><div class="d-num">24</div><div class="d-mon">Jul</div><div class="d-wd">Fri</div></div>
+      <div class="day-right">
+        <span class="badge b-base">Last day in Europe</span>
+        <div class="d-title">Munich · Englischer Garten · Marienplatz Glockenspiel</div>
+        <div class="d-desc">Easy final European day. Englischer Garten — pirate ship playground, Chinese Tower beer garden. Glockenspiel at noon at Marienplatz. Good German lunch. Pack, early dinner, early night. Flying tomorrow.</div>
+        <div class="hls"><span class="hl">Englischer Garten</span><span class="hl">Glockenspiel noon</span><span class="hl">Chinese Tower playground</span><span class="hl">Pack</span></div>
+      </div>
+    </div>
+    <div class="day transit-day">
+      <div class="day-left"><div class="d-num">25</div><div class="d-mon">Jul</div><div class="d-wd">Sat</div></div>
+      <div class="day-right">
+        <span class="badge b-fly">Fly</span>
+        <div class="d-title">Collect car from Galeria · drive to Munich Airport · fly Munich → Bangkok</div>
+        <div class="d-desc">Walk to Galeria München, collect hire car, drive to Munich Airport, return car. Check in. Fly Munich → Bangkok.</div>
+        <div class="drive-tag fly">✈ Munich → Bangkok</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- RETURN -->
+<div class="phase-hdr"><span class="phase-label">✈ Return · Bangkok → Melbourne</span><div class="phase-rule"></div></div>
+
+<div class="base" id="base-bangkok">
+  <div class="base-hdr" onclick="toggleBase('base-bangkok')">
+    <div class="b-icon" style="background:var(--purple-bg);color:var(--purple)">TH</div>
+    <div>
+      <div class="b-name">Hyatt Regency Suvarnabhumi — Bangkok</div>
+      <div class="b-addr">13hr layover · indoor walk from terminal · check in on arrival · 24hr room policy</div>
+    </div>
+    <div style="display:flex;align-items:center;gap:8px">
+      <div class="b-nights"><div class="b-nights-num">—</div><div class="b-nights-label">13hr layover</div></div>
+      <span class="b-toggle">▾</span>
+    </div>
+  </div>
+  <div class="base-body">
+    <div class="day transit-day">
+      <div class="day-left"><div class="d-num">26</div><div class="d-mon">Jul</div><div class="d-wd">Sun</div></div>
+      <div class="day-right">
+        <span class="badge b-fly">Layover</span>
+        <div class="d-title">Arrive Bangkok 6:05am · Hyatt check-in · fly out 7:40pm</div>
+        <div class="d-desc">Arrive Bangkok 6:05am. Indoor walk to Hyatt Regency — no transfer needed. Check in immediately (24hr policy). Breakfast from 3am. Pool, rest, decompress. Fly out 7:40pm Bangkok → Melbourne.</div>
+        <div class="drive-tag fly">✈ Bangkok → Melbourne · depart 7:40pm</div>
+      </div>
+    </div>
+    <div class="day transit-day">
+      <div class="day-left"><div class="d-num">27</div><div class="d-mon">Jul</div><div class="d-wd">Mon</div></div>
+      <div class="day-right">
+        <span class="badge b-arrive">Home 🏠</span>
+        <div class="d-title">Arrive Melbourne 7am</div>
+        <div class="d-desc">Home. Kids to bed. Trip complete.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- SUMMARY -->
+<div class="summary">
+  <div class="s-card"><div class="s-label">Total nights</div><div class="s-val">21</div><div class="s-sub">Jul 4 – Jul 25</div></div>
+  <div class="s-card"><div class="s-label">Bases</div><div class="s-val">9</div><div class="s-sub">all booked</div></div>
+  <div class="s-card"><div class="s-label">Countries</div><div class="s-val">5</div><div class="s-sub">DE·AT·CH·IT·TH</div></div>
+  <div class="s-card"><div class="s-label">Longest drive</div><div class="s-val">4.5h</div><div class="s-sub">Villanova → Munich</div></div>
+  <div class="s-card"><div class="s-label">Bangkok</div><div class="s-val">13h</div><div class="s-sub">Hyatt layover</div></div>
+  <div class="s-card"><div class="s-label">Bernina</div><div class="s-val">Jul 16</div><div class="s-sub">St Moritz → Tirano</div></div>
+</div>
+
+<!-- LOGISTICS -->
+<div class="logistics" id="logistics-section">
+  <div class="log-hdr">Key logistics & reminders</div>
+  <div class="log-grid">
+    <div class="log-item">
+      <div class="log-label">Car hire · Budget</div>
+      <div class="log-val">Munich Airport pickup & dropoff · ~21 days · SUV · 2 child seats pre-booked · Cross-border AT + IT + CH confirmed in writing · VE103 certificate required · One-off cross-border fee (not daily)</div>
+    </div>
+    <div class="log-item">
+      <div class="log-label">Flights & documents</div>
+      <div class="log-val">Avoiding Qatar · Thai Airways — check cancellation terms before booking · IDP from RACV before departure (both drivers) · MEL→BKK→MUC outbound · MUC→BKK→MEL return</div>
+    </div>
+    <div class="log-item">
+      <div class="log-label">Bernina Express</div>
+      <div class="log-val">Booked: St Moritz → Tirano Thu Jul 16 · Seats 71, 72, 73 Wagon 14 · Isabel free (under 6) · Baby on lap free · Car parked St Moritz station Jul 15 evening – Jul 17 morning · Return by regional train</div>
+    </div>
+    <div class="log-item">
+      <div class="log-label">Lago di Braies</div>
+      <div class="log-val">Leave Villanova by 7:30am on Jul 20 · Arrive before 9:30am — no booking needed before restrictions · Flat pram circuit · Combine with Cortina + Lake Misurina same day</div>
+    </div>
+    <div class="log-item">
+      <div class="log-label">Bangkok · Hyatt</div>
+      <div class="log-val">Hyatt Regency Suvarnabhumi · Book direct hyatt.com · Note 6:05am arrival in special requests · Baby cot pre-requested · Indoor walk from terminal · 24hr room policy · Book direct for guaranteed early access</div>
+    </div>
+    <div class="log-item">
+      <div class="log-label">Tolls & vignettes</div>
+      <div class="log-val">Switzerland motorway vignette ~CHF 40 at border · Austrian vignette ~€10 · Italian A22 tolls — keep card ready · Munich car parked Galeria München Jul 23–25 · Walk to collect on Jul 25 morning</div>
+    </div>
+  </div>
+</div>
+
+</div><!-- end content -->
+
+<div class="footer">
+  <span>Europe & Bangkok Summer 2026 · Family of 4 · Final itinerary</span>
+  <span>Alex · Hannah · Isabel · Baby</span>
+  <span>Depart Fri Jul 3 · Return Mon Jul 27</span>
+</div>
+
+</div><!-- end main -->
+</div><!-- end layout -->
+
+<script>
+function toggleBase(id) {
+  const base = document.getElementById(id);
+  base.classList.toggle('collapsed');
+}
+
+function highlight(id) {
+  document.querySelectorAll('.base').forEach(b => b.classList.remove('highlighted'));
+  const el = document.getElementById(id);
+  if (el) {
+    el.classList.add('highlighted');
+    setTimeout(() => el.classList.remove('highlighted'), 2000);
+  }
+}
+
+// Active nav highlighting on scroll
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      document.querySelectorAll('.nav-item').forEach(item => {
+        item.classList.remove('active');
+        if (item.getAttribute('href') === '#' + entry.target.id) {
+          item.classList.add('active');
+        }
+      });
+    }
+  });
+}, { threshold: 0.3 });
+
+document.querySelectorAll('.base[id]').forEach(el => observer.observe(el));
+</script>
+</body>
+</html>
