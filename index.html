@@ -714,27 +714,26 @@ body {
 #trip-map { width: 100%; height: 100%; }
 
 @keyframes pulse-here {
-  0%   { box-shadow: 0 0 0 0   rgba(122,30,30,.5); }
-  70%  { box-shadow: 0 0 0 14px rgba(122,30,30,0); }
-  100% { box-shadow: 0 0 0 0   rgba(122,30,30,0); }
+  0%   { box-shadow: 0 0 0 0    rgba(255,255,255,.55), 0 2px 10px rgba(0,0,0,.4); }
+  70%  { box-shadow: 0 0 0 12px rgba(255,255,255,0),   0 2px 10px rgba(0,0,0,.4); }
+  100% { box-shadow: 0 0 0 0    rgba(255,255,255,0),   0 2px 10px rgba(0,0,0,.4); }
 }
 
-.marker-here {
-  width: 14px; height: 14px;
-  background: #7A1E1E;
-  border: 2.5px solid #fff;
+.marker-num {
   border-radius: 50%;
-  animation: pulse-here 2s infinite;
-  box-shadow: 0 2px 8px rgba(122,30,30,.45);
+  border: 2px solid;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'DM Mono', monospace;
+  font-weight: 500;
+  color: rgba(245,240,232,.9);
+  box-shadow: 0 2px 8px rgba(0,0,0,.35);
+  cursor: pointer;
+  line-height: 1;
 }
 
-.marker-next {
-  width: 12px; height: 12px;
-  background: #1E3F6B;
-  border: 2.5px solid #fff;
-  border-radius: 50%;
-  box-shadow: 0 2px 6px rgba(30,63,107,.4);
-}
+.marker-num-here { animation: pulse-here 2s infinite; }
 
 .leaflet-popup-content-wrapper {
   border-radius: 10px !important;
@@ -1485,15 +1484,15 @@ document.querySelectorAll('.base[id]').forEach(el => observer.observe(el));
 // ── TRIP MAP ──
 (function() {
   const ROUTE = [
-    { id: 'base-glockenalm',  name: 'Glockenalm',            place: 'Bavaria · Germany',        dates: 'Jul 4',     lat: 47.754, lng: 12.641, checkin: '2026-07-04', checkout: '2026-07-05' },
-    { id: 'base-reichenhall', name: 'ibis Bad Reichenhall',   place: 'Bad Reichenhall · Germany', dates: 'Jul 5–7',  lat: 47.723, lng: 12.877, checkin: '2026-07-05', checkout: '2026-07-07' },
-    { id: 'base-zell',        name: 'Hotel St George',        place: 'Zell am See · Austria',    dates: 'Jul 7–10',  lat: 47.323, lng: 12.798, checkin: '2026-07-07', checkout: '2026-07-10' },
-    { id: 'base-pfronten',    name: 'Wedding Venue',          place: 'Pfronten · Germany',       dates: 'Jul 10–15', lat: 47.581, lng: 10.564, checkin: '2026-07-10', checkout: '2026-07-15' },
-    { id: 'base-stmoritz',    name: 'B&B River Inn',          place: 'St. Moritz · Switzerland', dates: 'Jul 15',    lat: 46.498, lng: 9.838,  checkin: '2026-07-15', checkout: '2026-07-16' },
-    { id: 'base-tirano',      name: 'Bernina View',           place: 'Tirano · Italy',           dates: 'Jul 16',    lat: 46.215, lng: 10.169, checkin: '2026-07-16', checkout: '2026-07-17' },
-    { id: 'base-nalles',      name: 'St. Vigilhof',           place: 'Nalles · South Tyrol',     dates: 'Jul 17',    lat: 46.552, lng: 11.178, checkin: '2026-07-17', checkout: '2026-07-18' },
-    { id: 'base-villanova',   name: 'Chalet Vicino al Bosco', place: 'Villanova · Dolomites',    dates: 'Jul 18–23', lat: 46.449, lng: 12.183, checkin: '2026-07-18', checkout: '2026-07-23' },
-    { id: 'base-munich',      name: "Emma's House",           place: 'Munich · Germany',         dates: 'Jul 23–25', lat: 48.137, lng: 11.575, checkin: '2026-07-23', checkout: '2026-07-25' },
+    { id: 'base-glockenalm',  name: 'Glockenalm',            place: 'Bavaria · Germany',        dates: 'Jul 4',     lat: 47.754, lng: 12.641, checkin: '2026-07-04', checkout: '2026-07-05', bg: '#0F2240', border: '#1E3F6B' },
+    { id: 'base-reichenhall', name: 'ibis Bad Reichenhall',   place: 'Bad Reichenhall · Germany', dates: 'Jul 5–7',  lat: 47.723, lng: 12.877, checkin: '2026-07-05', checkout: '2026-07-07', bg: '#0F2240', border: '#1E3F6B' },
+    { id: 'base-zell',        name: 'Hotel St George',        place: 'Zell am See · Austria',    dates: 'Jul 7–10',  lat: 47.323, lng: 12.798, checkin: '2026-07-07', checkout: '2026-07-10', bg: '#0F3535', border: '#1A5C5C' },
+    { id: 'base-pfronten',    name: 'Wedding Venue',          place: 'Pfronten · Germany',       dates: 'Jul 10–15', lat: 47.581, lng: 10.564, checkin: '2026-07-10', checkout: '2026-07-15', bg: '#4A1010', border: '#7A1E1E' },
+    { id: 'base-stmoritz',    name: 'B&B River Inn',          place: 'St. Moritz · Switzerland', dates: 'Jul 15',    lat: 46.498, lng: 9.838,  checkin: '2026-07-15', checkout: '2026-07-16', bg: '#163525', border: '#2A5C45' },
+    { id: 'base-tirano',      name: 'Bernina View',           place: 'Tirano · Italy',           dates: 'Jul 16',    lat: 46.215, lng: 10.169, checkin: '2026-07-16', checkout: '2026-07-17', bg: '#4A2E08', border: '#7A4E10' },
+    { id: 'base-nalles',      name: 'St. Vigilhof',           place: 'Nalles · South Tyrol',     dates: 'Jul 17',    lat: 46.552, lng: 11.178, checkin: '2026-07-17', checkout: '2026-07-18', bg: '#4A2E08', border: '#7A4E10' },
+    { id: 'base-villanova',   name: 'Chalet Vicino al Bosco', place: 'Villanova · Dolomites',    dates: 'Jul 18–23', lat: 46.449, lng: 12.183, checkin: '2026-07-18', checkout: '2026-07-23', bg: '#6B4E07', border: '#B8860B' },
+    { id: 'base-munich',      name: "Emma's House",           place: 'Munich · Germany',         dates: 'Jul 23–25', lat: 48.137, lng: 11.575, checkin: '2026-07-23', checkout: '2026-07-25', bg: '#0F2240', border: '#1E3F6B' },
   ].map(s => ({ ...s, checkin: new Date(s.checkin), checkout: new Date(s.checkout) }));
 
   const today = new Date(); today.setHours(0,0,0,0);
@@ -1523,6 +1522,11 @@ document.querySelectorAll('.base[id]').forEach(el => observer.observe(el));
     const isHere = i === hereIdx;
     const isNext = i === nextIdx;
     const isPast = onTrip && today >= stop.checkout;
+    const num = i + 1;
+    const size = isHere ? 26 : 22;
+    const opacity = isPast ? 0.38 : 1;
+    const extraClass = isHere ? 'marker-num-here' : '';
+    const fontSize = size <= 22 ? '10px' : '11px';
 
     const popup = `
       <div class="map-popup-name">${stop.name}</div>
@@ -1531,26 +1535,12 @@ document.querySelectorAll('.base[id]').forEach(el => observer.observe(el));
       ${isNext ? '<span class="map-popup-badge" style="background:#E8EFF7;color:#1E3F6B">Next stop</span>' : ''}
     `;
 
-    let marker;
-    if (isHere) {
-      marker = L.marker([stop.lat, stop.lng], {
-        icon: L.divIcon({ className: '', html: '<div class="marker-here"></div>', iconSize: [14,14], iconAnchor: [7,7], popupAnchor: [0,-12] })
-      });
-    } else if (isNext) {
-      marker = L.marker([stop.lat, stop.lng], {
-        icon: L.divIcon({ className: '', html: '<div class="marker-next"></div>', iconSize: [12,12], iconAnchor: [6,6], popupAnchor: [0,-10] })
-      });
-    } else {
-      marker = L.circleMarker([stop.lat, stop.lng], {
-        radius: 6,
-        fillColor: isPast ? '#C8C4BC' : '#4A4840',
-        color: '#fff',
-        weight: 1.5,
-        fillOpacity: isPast ? 0.5 : 0.85
-      });
-    }
+    const html = `<div class="marker-num ${extraClass}" style="width:${size}px;height:${size}px;background:${stop.bg};border-color:${stop.border};opacity:${opacity};font-size:${fontSize}">${num}</div>`;
+    const icon = L.divIcon({ className: '', html, iconSize: [size,size], iconAnchor: [size/2,size/2], popupAnchor: [0,-(size/2+6)] });
 
-    marker.bindPopup(popup, { maxWidth: 220 }).addTo(map);
+    L.marker([stop.lat, stop.lng], { icon })
+      .bindPopup(popup, { maxWidth: 220 })
+      .addTo(map);
   });
 
   map.fitBounds(L.latLngBounds(coords).pad(0.12));
@@ -1559,10 +1549,10 @@ document.querySelectorAll('.base[id]').forEach(el => observer.observe(el));
   const legend = document.getElementById('map-legend-dynamic');
   if (legend) {
     const items = [];
-    if (hereIdx >= 0) items.push(`<div class="map-leg-item"><div class="map-leg-dot" style="background:#7A1E1E"></div><strong>You are here</strong> · ${ROUTE[hereIdx].name}</div>`);
-    if (nextIdx >= 0) items.push(`<div class="map-leg-item"><div class="map-leg-dot" style="background:#1E3F6B"></div><strong>Next stop</strong> · ${ROUTE[nextIdx].name}</div>`);
+    if (hereIdx >= 0) items.push(`<div class="map-leg-item"><div class="map-leg-dot" style="background:${ROUTE[hereIdx].border}"></div><strong>You are here</strong> · ${ROUTE[hereIdx].name}</div>`);
+    if (nextIdx >= 0) items.push(`<div class="map-leg-item"><div class="map-leg-dot" style="background:${ROUTE[nextIdx].border}"></div><strong>Next stop</strong> · ${ROUTE[nextIdx].name}</div>`);
     if (items.length === 0) {
-      ROUTE.forEach(s => items.push(`<div class="map-leg-item"><div class="map-leg-dot" style="background:#4A4840"></div>${s.name}</div>`));
+      ROUTE.forEach((s, i) => items.push(`<div class="map-leg-item"><div class="map-leg-dot" style="background:${s.border}"></div>${i+1}. ${s.name}</div>`));
     }
     legend.innerHTML = items.join('');
   }
