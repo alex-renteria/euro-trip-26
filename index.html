@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Europe Summer 2026 · Family Trip</title>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Mono:wght@300;400;500&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
 <style>
 :root {
   --ink: #18160F;
@@ -40,7 +41,7 @@ body {
   color: var(--ink);
   font-family: 'Outfit', sans-serif;
   font-weight: 300;
-  font-size: 15px;
+  font-size: 17px;
   line-height: 1.6;
 }
 
@@ -527,14 +528,14 @@ body {
 .b-split   { background: var(--amber-bg);  color: var(--amber);  }
 
 .d-title {
-  font-size: 15px;
+  font-size: 17px;
   font-weight: 500;
   color: var(--ink);
   line-height: 1.4;
 }
 
 .d-desc {
-  font-size: 13.5px;
+  font-size: 15px;
   color: var(--ink-mid);
   line-height: 1.7;
   font-weight: 300;
@@ -606,6 +607,31 @@ body {
   margin-bottom: 3px;
   font-weight: 500;
 }
+
+/* ── WORLD CUP NOTES ── */
+.wc-note {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  font-family: 'DM Mono', monospace;
+  font-size: 10px;
+  color: var(--ink-light);
+  background: rgba(0,0,0,.025);
+  border: 1px dashed var(--rule);
+  padding: 3px 10px;
+  border-radius: 999px;
+  align-self: flex-start;
+  margin-top: 2px;
+  letter-spacing: .04em;
+}
+.wc-note .wc-stage {
+  color: var(--ink-mid);
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: .08em;
+}
+.wc-note.wc-final { color: var(--amber); background: var(--amber-bg); border-style: solid; border-color: #D4B070; }
+.wc-note.wc-final .wc-stage { color: var(--amber); }
 
 /* ── SUMMARY ── */
 .summary {
@@ -709,6 +735,109 @@ body {
   gap: 8px;
 }
 
+/* ── LEAFLET MAP ── */
+#trip-map { width: 100%; height: 100%; }
+
+@keyframes pulse-here {
+  0%   { box-shadow: 0 0 0 0    rgba(255,255,255,.55), 0 2px 10px rgba(0,0,0,.4); }
+  70%  { box-shadow: 0 0 0 12px rgba(255,255,255,0),   0 2px 10px rgba(0,0,0,.4); }
+  100% { box-shadow: 0 0 0 0    rgba(255,255,255,0),   0 2px 10px rgba(0,0,0,.4); }
+}
+
+.marker-num {
+  border-radius: 50%;
+  border: 2px solid;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'DM Mono', monospace;
+  font-weight: 500;
+  color: rgba(245,240,232,.9);
+  box-shadow: 0 2px 8px rgba(0,0,0,.35);
+  cursor: pointer;
+  line-height: 1;
+}
+
+.marker-num-here { animation: pulse-here 2s infinite; }
+
+.leaflet-popup-content-wrapper {
+  border-radius: 10px !important;
+  box-shadow: 0 4px 20px rgba(0,0,0,.1) !important;
+  border: 1px solid #D8D2C6 !important;
+}
+
+.leaflet-popup-content { margin: 12px 14px !important; }
+
+.map-popup-name {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 17px;
+  font-weight: 400;
+  color: #18160F;
+  line-height: 1.3;
+}
+
+.map-popup-place {
+  font-family: 'DM Mono', monospace;
+  font-size: 10px;
+  color: #7A7870;
+  margin-top: 3px;
+  letter-spacing: .03em;
+}
+
+.map-popup-badge {
+  display: inline-block;
+  font-family: 'DM Mono', monospace;
+  font-size: 9px;
+  letter-spacing: .09em;
+  text-transform: uppercase;
+  padding: 2px 9px;
+  border-radius: 999px;
+  margin-top: 7px;
+  font-weight: 500;
+}
+
+/* ── STATUS STRIP ── */
+.status-strip {
+  background: #111009;
+  border-bottom: 1px solid rgba(255,255,255,.06);
+  display: flex;
+  margin-left: 0;
+}
+
+.status-card {
+  flex: 1;
+  padding: 1.1rem 2rem;
+  border-right: 1px solid rgba(255,255,255,.07);
+  text-align: center;
+}
+
+.status-card:last-child { border-right: none; }
+
+.st-label {
+  font-family: 'DM Mono', monospace;
+  font-size: 9px;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+  color: rgba(245,240,232,.28);
+  margin-bottom: 7px;
+}
+
+.st-val {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 30px;
+  font-weight: 300;
+  color: rgba(245,240,232,.88);
+  line-height: 1;
+}
+
+.st-sub {
+  font-family: 'DM Mono', monospace;
+  font-size: 9.5px;
+  color: rgba(245,240,232,.33);
+  margin-top: 6px;
+  letter-spacing: .04em;
+}
+
 /* ── MOBILE ── */
 @media (max-width: 768px) {
   :root { --sidebar-w: 0px; }
@@ -719,6 +848,9 @@ body {
   .log-grid { grid-template-columns: 1fr; }
   .log-item { border-right: none !important; }
   .log-item:last-child { border-bottom: none; }
+  .status-strip { flex-direction: column; }
+  .status-card { border-right: none; border-bottom: 1px solid rgba(255,255,255,.07); padding: .8rem 1.25rem; }
+  .status-card:last-child { border-bottom: none; }
 }
 </style>
 </head>
@@ -827,24 +959,32 @@ body {
   </div>
 </div>
 
+<!-- STATUS STRIP -->
+<div class="status-strip">
+  <div class="status-card">
+    <div class="st-label">Today</div>
+    <div class="st-val" id="st-date">—</div>
+    <div class="st-sub" id="st-day">—</div>
+  </div>
+  <div class="status-card">
+    <div class="st-label">Where we are</div>
+    <div class="st-val" id="st-place">—</div>
+    <div class="st-sub" id="st-base">—</div>
+  </div>
+  <div class="status-card">
+    <div class="st-label" id="st-count-label">Days to next move</div>
+    <div class="st-val" id="st-count">—</div>
+    <div class="st-sub" id="st-count-sub">—</div>
+  </div>
+</div>
+
 <!-- MAP -->
 <div id="map-section">
   <div class="map-title">Route Map</div>
   <div class="map-container">
-    <iframe
-      src="https://www.google.com/maps/embed/v1/directions?key=AIzaSyD-9tSrke72PouQMnMX-a7eZSW0jkFMBWY&origin=Bad+Reichenhall,Germany&destination=Munich,Germany&waypoints=Zell+am+See,Austria|Pfronten,Germany|St.+Moritz,Switzerland|Tirano,Italy|Nalles,Italy|Villanova+BL,Italy&mode=driving"
-      allowfullscreen loading="lazy">
-    </iframe>
+    <div id="trip-map"></div>
   </div>
-  <div class="map-legend">
-    <div class="map-leg-item"><div class="map-leg-dot" style="background:#1E3F6B"></div>Bavaria (Bad Reichenhall)</div>
-    <div class="map-leg-item"><div class="map-leg-dot" style="background:#1A5C5C"></div>Zell am See</div>
-    <div class="map-leg-item"><div class="map-leg-dot" style="background:#7A1E1E"></div>Pfronten (Wedding)</div>
-    <div class="map-leg-item"><div class="map-leg-dot" style="background:#2A5C45"></div>St Moritz</div>
-    <div class="map-leg-item"><div class="map-leg-dot" style="background:#7A4E10"></div>Tirano → Nalles</div>
-    <div class="map-leg-item"><div class="map-leg-dot" style="background:#B8860B"></div>Villanova (Dolomites base)</div>
-    <div class="map-leg-item"><div class="map-leg-dot" style="background:#1E3F6B"></div>Munich (return)</div>
-  </div>
+  <div class="map-legend" id="map-legend-dynamic"></div>
 </div>
 
 <div class="content">
@@ -872,6 +1012,7 @@ body {
         <div class="d-title">Melbourne 1:30pm → Bangkok 8pm → Munich 7:05am</div>
         <div class="d-desc">Depart MEL 1:30pm. Arrive Bangkok 8pm. Connecting flight departs 12:50am. Arrive Munich 7:05am Saturday July 4. Transit Bangkok — no overnight, no hotel needed.</div>
         <div class="drive-tag fly">✈ 9.5h MEL→BKK · 11h 15m BKK→MUC</div>
+        <div class="wc-note"><span class="wc-stage">⚽ R32</span>last day · in transit</div>
       </div>
     </div>
   </div>
@@ -901,6 +1042,7 @@ body {
         <div class="d-desc">Pick up hire car at MUC — SUV, 2 child seats pre-booked, cross-border AT + IT + CH confirmed in writing. Drive to Glockenalm. Settle in. Hannah's hen's night. Early night for everyone.</div>
         <div class="drive-tag">🚗 ~1h from Munich Airport</div>
         <div class="note-box amber"><strong>Hannah — hen's night</strong>Evening celebration. Alex holds down the fort with the kids.</div>
+        <div class="wc-note"><span class="wc-stage">⚽ R16</span>2 matches · ~21:00 & 03:00 CET</div>
       </div>
     </div>
   </div>
@@ -926,6 +1068,7 @@ body {
         <div class="d-title">Glockenalm → ibis Bad Reichenhall</div>
         <div class="d-desc">Short drive to Bad Reichenhall. Check in, walk the historic spa promenade, easy lunch. Recovery day after the long-haul.</div>
         <div class="drive-tag">🚗 Short drive</div>
+        <div class="wc-note"><span class="wc-stage">⚽ R16</span>2 matches · ~21:00 & 03:00 CET</div>
       </div>
     </div>
     <div class="day lakes-day">
@@ -936,6 +1079,7 @@ body {
         <div class="d-desc">Morning: electric boat on the Königssee — glacial emerald lake enclosed by sheer cliffs, St Bartholomä chapel. Entirely flat and pram-perfect. Afternoon: 30 min to Salzburg — UNESCO old town, Mirabell gardens. Back for dinner.</div>
         <div class="drive-tag">🚗 20m to Königssee · 30m to Salzburg</div>
         <div class="hls"><span class="hl lake">Königssee boat</span><span class="hl lake">St Bartholomä</span><span class="hl">Mirabell gardens</span><span class="hl">Salzburg old town</span></div>
+        <div class="wc-note"><span class="wc-stage">⚽ R16</span>2 matches · ~21:00 & 03:00 CET</div>
       </div>
     </div>
   </div>
@@ -963,6 +1107,7 @@ body {
         <div class="drive-tag">🚗 2h 30m total via Hallstatt</div>
         <div class="note-box"><strong>For Hannah · lakes highlight</strong>Hallstatt is the postcard lake village of Austria — the most photographed village in the Alps. Entirely flat and pram-perfect. Don't miss it.</div>
         <div class="hls"><span class="hl lake">Hallstatt village</span><span class="hl lake">Hallstätter See</span><span class="hl lake">Zeller See arrival</span></div>
+        <div class="wc-note"><span class="wc-stage">⚽ R16</span>last 2 matches · ~21:00 & 03:00 CET</div>
       </div>
     </div>
     <div class="day lakes-day">
@@ -983,6 +1128,7 @@ body {
         <div class="d-desc">Morning: Kitzbühel — medieval walled town, painted facades, great lunch. Afternoon: Grossglockner High Alpine Road (Austria's most dramatic drive) OR Krimml Waterfalls (Europe's highest, flat misty forest path).</div>
         <div class="drive-tag">🚗 45m to Kitzbühel · 45–60m Grossglockner/Krimml</div>
         <div class="hls"><span class="hl">Kitzbühel medieval town</span><span class="hl">Grossglockner Road</span><span class="hl">Krimml Falls option</span></div>
+        <div class="wc-note"><span class="wc-stage">⚽ QF</span>1 match · ~22:00 CET</div>
       </div>
     </div>
   </div>
@@ -1011,6 +1157,7 @@ body {
         <div class="d-title">Zell am See → Pfronten · Emma pre-meet</div>
         <div class="d-desc">2 hr drive west. Arrive for Emma's pre-wedding gathering. Settle in. Neuschwanstein 20 min away if energy allows.</div>
         <div class="drive-tag">🚗 2h · Zell am See → Pfronten</div>
+        <div class="wc-note"><span class="wc-stage">⚽ QF</span>1 match · ~22:00 CET</div>
       </div>
     </div>
     <div class="day wed-day">
@@ -1019,6 +1166,7 @@ body {
         <span class="badge b-wedding">Wedding Day 🎉</span>
         <div class="d-title">Emma's wedding — Pfronten</div>
         <div class="d-desc">The whole reason you're here. Enjoy every single minute.</div>
+        <div class="wc-note"><span class="wc-stage">⚽ QF</span>2 matches · skip · wedding day</div>
       </div>
     </div>
     <div class="day wed-day">
@@ -1043,6 +1191,7 @@ body {
         <div class="d-title">Final day with Emma & friends · Allgäu</div>
         <div class="d-desc">Last day with the wedding group. Neuschwanstein, Füssen old town, Walchensee lake, Allgäu valley drives.</div>
         <div class="hls"><span class="hl">Neuschwanstein castle</span><span class="hl">Füssen old town</span><span class="hl lake">Walchensee lake</span><span class="hl">Allgäu valleys</span></div>
+        <div class="wc-note"><span class="wc-stage">⚽ SF 1</span>~21:00 CET · big one</div>
       </div>
     </div>
   </div>
@@ -1072,6 +1221,7 @@ body {
         <div class="d-desc">Drive Pfronten to St Moritz via Innsbruck and the Inn Valley — easiest Alpine route, avoids technical passes. Park car at St Moritz station paid parking. Car stays here overnight and all of tomorrow. Check into B&B River Inn.</div>
         <div class="drive-tag">🚗 ~3h 30m · Pfronten → St Moritz via Innsbruck/Landeck</div>
         <div class="note-box amber"><strong>Car logistics — important</strong>Park at St Moritz station Jul 15 evening. Car stays here all of Jul 16. You return by regional train Jul 17 morning to collect it before driving to Nalles.</div>
+        <div class="wc-note"><span class="wc-stage">⚽ SF 2</span>~21:00 CET · big one</div>
       </div>
     </div>
   </div>
@@ -1155,6 +1305,7 @@ body {
         <div class="d-desc">Drive from Nalles through the Dolomites to Villanova. Mosigo lake is a short walk from the chalet. Settle in, afternoon at the lake.</div>
         <div class="drive-tag">🚗 ~2h · Nalles → Villanova via Dolomites</div>
         <div class="hls"><span class="hl lake">Mosigo Lake arrive</span><span class="hl">Children's playground</span></div>
+        <div class="wc-note"><span class="wc-stage">⚽ 3rd place</span>~21:00 CET</div>
       </div>
     </div>
     <div class="day lakes-day">
@@ -1164,6 +1315,7 @@ body {
         <div class="d-title">Mosigo Lake · local explore · no driving</div>
         <div class="d-desc">Morning at Mosigo Lake — flat circuit walk, playground for Isabel, café. Explore Villanova and San Vito di Cadore village (5 min). Relax and settle in properly after a big travel week.</div>
         <div class="hls"><span class="hl lake">Mosigo Lake morning</span><span class="hl">San Vito di Cadore</span><span class="hl">Rest & settle</span></div>
+        <div class="wc-note wc-final"><span class="wc-stage">⚽ FINAL 🏆</span>~21:00 CET · MetLife · perfect rest-day evening</div>
       </div>
     </div>
     <div class="day train-day">
@@ -1334,6 +1486,7 @@ body {
 </div><!-- end main -->
 </div><!-- end layout -->
 
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 <script>
 function toggleBase(id) {
   const base = document.getElementById(id);
@@ -1364,6 +1517,155 @@ const observer = new IntersectionObserver((entries) => {
 }, { threshold: 0.3 });
 
 document.querySelectorAll('.base[id]').forEach(el => observer.observe(el));
+
+// ── TRIP MAP ──
+(function() {
+  const ROUTE = [
+    { id: 'base-glockenalm',  name: 'Glockenalm',            place: 'Bavaria · Germany',        dates: 'Jul 4',     lat: 47.754, lng: 12.641, checkin: '2026-07-04', checkout: '2026-07-05', bg: '#0F2240', border: '#1E3F6B' },
+    { id: 'base-reichenhall', name: 'ibis Bad Reichenhall',   place: 'Bad Reichenhall · Germany', dates: 'Jul 5–7',  lat: 47.723, lng: 12.877, checkin: '2026-07-05', checkout: '2026-07-07', bg: '#0F2240', border: '#1E3F6B' },
+    { id: 'base-zell',        name: 'Hotel St George',        place: 'Zell am See · Austria',    dates: 'Jul 7–10',  lat: 47.323, lng: 12.798, checkin: '2026-07-07', checkout: '2026-07-10', bg: '#0F3535', border: '#1A5C5C' },
+    { id: 'base-pfronten',    name: 'Wedding Venue',          place: 'Pfronten · Germany',       dates: 'Jul 10–15', lat: 47.581, lng: 10.564, checkin: '2026-07-10', checkout: '2026-07-15', bg: '#4A1010', border: '#7A1E1E' },
+    { id: 'base-stmoritz',    name: 'B&B River Inn',          place: 'St. Moritz · Switzerland', dates: 'Jul 15',    lat: 46.498, lng: 9.838,  checkin: '2026-07-15', checkout: '2026-07-16', bg: '#163525', border: '#2A5C45' },
+    { id: 'base-tirano',      name: 'Bernina View',           place: 'Tirano · Italy',           dates: 'Jul 16',    lat: 46.215, lng: 10.169, checkin: '2026-07-16', checkout: '2026-07-17', bg: '#4A2E08', border: '#7A4E10' },
+    { id: 'base-nalles',      name: 'St. Vigilhof',           place: 'Nalles · South Tyrol',     dates: 'Jul 17',    lat: 46.552, lng: 11.178, checkin: '2026-07-17', checkout: '2026-07-18', bg: '#4A2E08', border: '#7A4E10' },
+    { id: 'base-villanova',   name: 'Chalet Vicino al Bosco', place: 'Villanova · Dolomites',    dates: 'Jul 18–23', lat: 46.449, lng: 12.183, checkin: '2026-07-18', checkout: '2026-07-23', bg: '#6B4E07', border: '#B8860B' },
+    { id: 'base-munich',      name: "Emma's House",           place: 'Munich · Germany',         dates: 'Jul 23–25', lat: 48.137, lng: 11.575, checkin: '2026-07-23', checkout: '2026-07-25', bg: '#0F2240', border: '#1E3F6B' },
+  ].map(s => ({ ...s, checkin: new Date(s.checkin), checkout: new Date(s.checkout) }));
+
+  const today = new Date(); today.setHours(0,0,0,0);
+  const DEPART = new Date('2026-07-03');
+  const HOME   = new Date('2026-07-27');
+  const onTrip = today >= DEPART && today < HOME;
+
+  let hereIdx = -1, nextIdx = -1;
+  if (onTrip) {
+    hereIdx = ROUTE.findIndex(s => today >= s.checkin && today < s.checkout);
+    if (hereIdx >= 0) nextIdx = hereIdx + 1 < ROUTE.length ? hereIdx + 1 : -1;
+    else nextIdx = ROUTE.findIndex(s => s.checkin > today);
+  }
+
+  const map = L.map('trip-map', { scrollWheelZoom: false });
+
+  L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
+    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>',
+    subdomains: 'abcd',
+    maxZoom: 19
+  }).addTo(map);
+
+  const coords = ROUTE.map(s => [s.lat, s.lng]);
+  L.polyline(coords, { color: '#C8C4BC', weight: 2, dashArray: '5 8' }).addTo(map);
+
+  ROUTE.forEach((stop, i) => {
+    const isHere = i === hereIdx;
+    const isNext = i === nextIdx;
+    const isPast   = onTrip && today >= stop.checkout;
+    const isFuture = onTrip && !isHere && !isNext && !isPast;
+    const num  = i + 1;
+    const size = isHere ? 26 : 22;
+    const opacity = isPast ? 0.35 : isFuture ? 0.6 : 1;
+    const extraClass = isHere ? 'marker-num-here' : '';
+    const fontSize = size <= 22 ? '10px' : '11px';
+
+    const popup = `
+      <div class="map-popup-name">${stop.name}</div>
+      <div class="map-popup-place">${stop.place} · ${stop.dates}</div>
+      ${isHere ? '<span class="map-popup-badge" style="background:#F5E8E8;color:#7A1E1E">You are here</span>' : ''}
+      ${isNext ? '<span class="map-popup-badge" style="background:#E8EFF7;color:#1E3F6B">Next stop</span>' : ''}
+    `;
+
+    const html = `<div class="marker-num ${extraClass}" style="width:${size}px;height:${size}px;background:${stop.bg};border-color:${stop.border};opacity:${opacity};font-size:${fontSize}">${num}</div>`;
+    const icon = L.divIcon({ className: '', html, iconSize: [size,size], iconAnchor: [size/2,size/2], popupAnchor: [0,-(size/2+6)] });
+
+    L.marker([stop.lat, stop.lng], { icon })
+      .bindPopup(popup, { maxWidth: 220 })
+      .addTo(map);
+  });
+
+  map.fitBounds(L.latLngBounds(coords).pad(0.12));
+
+  // Legend
+  const legend = document.getElementById('map-legend-dynamic');
+  if (legend) {
+    const items = [];
+    if (hereIdx >= 0) items.push(`<div class="map-leg-item"><div class="map-leg-dot" style="background:${ROUTE[hereIdx].border}"></div><strong>You are here</strong> · ${ROUTE[hereIdx].name}</div>`);
+    if (nextIdx >= 0) items.push(`<div class="map-leg-item"><div class="map-leg-dot" style="background:${ROUTE[nextIdx].border}"></div><strong>Next stop</strong> · ${ROUTE[nextIdx].name}</div>`);
+    if (items.length === 0) {
+      ROUTE.forEach((s, i) => items.push(`<div class="map-leg-item"><div class="map-leg-dot" style="background:${s.border}"></div>${i+1}. ${s.name}</div>`));
+    }
+    legend.innerHTML = items.join('');
+  }
+})();
+
+// ── STATUS STRIP ──
+(function() {
+  const BASES = [
+    { name: 'Glockenalm', place: 'Bavaria · Germany', checkin: '2026-07-04', checkout: '2026-07-05' },
+    { name: 'ibis Bad Reichenhall', place: 'Bad Reichenhall · Germany', checkin: '2026-07-05', checkout: '2026-07-07' },
+    { name: 'Hotel St George', place: 'Zell am See · Austria', checkin: '2026-07-07', checkout: '2026-07-10' },
+    { name: 'Wedding Venue', place: 'Pfronten · Germany', checkin: '2026-07-10', checkout: '2026-07-15' },
+    { name: 'B&B River Inn', place: 'St. Moritz · Switzerland', checkin: '2026-07-15', checkout: '2026-07-16' },
+    { name: 'Bernina View', place: 'Tirano · Italy', checkin: '2026-07-16', checkout: '2026-07-17' },
+    { name: 'St. Vigilhof', place: 'Nalles · Italy', checkin: '2026-07-17', checkout: '2026-07-18' },
+    { name: 'Chalet Vicino al Bosco', place: 'Villanova · Dolomites', checkin: '2026-07-18', checkout: '2026-07-23' },
+    { name: "Emma's House", place: 'Munich · Germany', checkin: '2026-07-23', checkout: '2026-07-25' },
+    { name: 'Hyatt Regency', place: 'Bangkok · Thailand', checkin: '2026-07-26', checkout: '2026-07-27' },
+  ].map(b => ({ ...b, checkin: new Date(b.checkin), checkout: new Date(b.checkout) }));
+
+  const DEPART = new Date('2026-07-03');
+  const TRANSIT_OUT = new Date('2026-07-03');
+  const HOME = new Date('2026-07-27');
+
+  const DAYS = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
+  const MONTHS = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+
+  const today = new Date();
+  today.setHours(0, 0, 0, 0);
+
+  const $ = id => document.getElementById(id);
+  $('st-date').textContent = today.getDate() + ' ' + MONTHS[today.getMonth()];
+  $('st-day').textContent = DAYS[today.getDay()];
+
+  function daysBetween(a, b) {
+    return Math.ceil((b - a) / 86400000);
+  }
+
+  if (today < DEPART) {
+    const d = daysBetween(today, DEPART);
+    $('st-place').textContent = 'Melbourne';
+    $('st-base').textContent = 'Home · pre-trip';
+    $('st-count-label').textContent = 'Days to departure';
+    $('st-count').textContent = d;
+    $('st-count-sub').textContent = 'Fri 3 Jul · wheels up';
+  } else if (today.getTime() === TRANSIT_OUT.getTime()) {
+    $('st-place').textContent = 'In transit';
+    $('st-base').textContent = 'MEL → BKK → MUC';
+    $('st-count-label').textContent = 'Departure day';
+    $('st-count').textContent = '✈';
+    $('st-count-sub').textContent = 'Safe travels!';
+  } else if (today >= HOME) {
+    $('st-place').textContent = 'Melbourne';
+    $('st-base').textContent = 'Home · trip complete';
+    $('st-count-label').textContent = 'Trip';
+    $('st-count').textContent = '✓';
+    $('st-count-sub').textContent = '21 nights · 5 countries';
+  } else {
+    const cur = BASES.find(b => today >= b.checkin && today < b.checkout);
+    if (cur) {
+      const left = daysBetween(today, cur.checkout);
+      $('st-place').textContent = cur.place;
+      $('st-base').textContent = cur.name;
+      $('st-count-label').textContent = left === 1 ? 'Moving tomorrow' : 'Nights left here';
+      $('st-count').textContent = left;
+      $('st-count-sub').textContent = left === 1 ? 'Last night here' : 'then next base';
+    } else {
+      $('st-place').textContent = 'In transit';
+      $('st-base').textContent = 'Travel day';
+      $('st-count-label').textContent = 'On the move';
+      $('st-count').textContent = '🚗';
+      $('st-count-sub').textContent = 'Drive or fly day';
+    }
+  }
+})();
 </script>
 </body>
 </html>
