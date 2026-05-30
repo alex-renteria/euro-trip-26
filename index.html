@@ -608,6 +608,31 @@ body {
   font-weight: 500;
 }
 
+/* ── WORLD CUP NOTES ── */
+.wc-note {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  font-family: 'DM Mono', monospace;
+  font-size: 10px;
+  color: var(--ink-light);
+  background: rgba(0,0,0,.025);
+  border: 1px dashed var(--rule);
+  padding: 3px 10px;
+  border-radius: 999px;
+  align-self: flex-start;
+  margin-top: 2px;
+  letter-spacing: .04em;
+}
+.wc-note .wc-stage {
+  color: var(--ink-mid);
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: .08em;
+}
+.wc-note.wc-final { color: var(--amber); background: var(--amber-bg); border-style: solid; border-color: #D4B070; }
+.wc-note.wc-final .wc-stage { color: var(--amber); }
+
 /* ── SUMMARY ── */
 .summary {
   display: grid;
@@ -987,6 +1012,7 @@ body {
         <div class="d-title">Melbourne 1:30pm → Bangkok 8pm → Munich 7:05am</div>
         <div class="d-desc">Depart MEL 1:30pm. Arrive Bangkok 8pm. Connecting flight departs 12:50am. Arrive Munich 7:05am Saturday July 4. Transit Bangkok — no overnight, no hotel needed.</div>
         <div class="drive-tag fly">✈ 9.5h MEL→BKK · 11h 15m BKK→MUC</div>
+        <div class="wc-note"><span class="wc-stage">⚽ R32</span>last day · in transit</div>
       </div>
     </div>
   </div>
@@ -1016,6 +1042,7 @@ body {
         <div class="d-desc">Pick up hire car at MUC — SUV, 2 child seats pre-booked, cross-border AT + IT + CH confirmed in writing. Drive to Glockenalm. Settle in. Hannah's hen's night. Early night for everyone.</div>
         <div class="drive-tag">🚗 ~1h from Munich Airport</div>
         <div class="note-box amber"><strong>Hannah — hen's night</strong>Evening celebration. Alex holds down the fort with the kids.</div>
+        <div class="wc-note"><span class="wc-stage">⚽ R16</span>2 matches · ~21:00 & 03:00 CET</div>
       </div>
     </div>
   </div>
@@ -1041,6 +1068,7 @@ body {
         <div class="d-title">Glockenalm → ibis Bad Reichenhall</div>
         <div class="d-desc">Short drive to Bad Reichenhall. Check in, walk the historic spa promenade, easy lunch. Recovery day after the long-haul.</div>
         <div class="drive-tag">🚗 Short drive</div>
+        <div class="wc-note"><span class="wc-stage">⚽ R16</span>2 matches · ~21:00 & 03:00 CET</div>
       </div>
     </div>
     <div class="day lakes-day">
@@ -1051,6 +1079,7 @@ body {
         <div class="d-desc">Morning: electric boat on the Königssee — glacial emerald lake enclosed by sheer cliffs, St Bartholomä chapel. Entirely flat and pram-perfect. Afternoon: 30 min to Salzburg — UNESCO old town, Mirabell gardens. Back for dinner.</div>
         <div class="drive-tag">🚗 20m to Königssee · 30m to Salzburg</div>
         <div class="hls"><span class="hl lake">Königssee boat</span><span class="hl lake">St Bartholomä</span><span class="hl">Mirabell gardens</span><span class="hl">Salzburg old town</span></div>
+        <div class="wc-note"><span class="wc-stage">⚽ R16</span>2 matches · ~21:00 & 03:00 CET</div>
       </div>
     </div>
   </div>
@@ -1078,6 +1107,7 @@ body {
         <div class="drive-tag">🚗 2h 30m total via Hallstatt</div>
         <div class="note-box"><strong>For Hannah · lakes highlight</strong>Hallstatt is the postcard lake village of Austria — the most photographed village in the Alps. Entirely flat and pram-perfect. Don't miss it.</div>
         <div class="hls"><span class="hl lake">Hallstatt village</span><span class="hl lake">Hallstätter See</span><span class="hl lake">Zeller See arrival</span></div>
+        <div class="wc-note"><span class="wc-stage">⚽ R16</span>last 2 matches · ~21:00 & 03:00 CET</div>
       </div>
     </div>
     <div class="day lakes-day">
@@ -1098,6 +1128,7 @@ body {
         <div class="d-desc">Morning: Kitzbühel — medieval walled town, painted facades, great lunch. Afternoon: Grossglockner High Alpine Road (Austria's most dramatic drive) OR Krimml Waterfalls (Europe's highest, flat misty forest path).</div>
         <div class="drive-tag">🚗 45m to Kitzbühel · 45–60m Grossglockner/Krimml</div>
         <div class="hls"><span class="hl">Kitzbühel medieval town</span><span class="hl">Grossglockner Road</span><span class="hl">Krimml Falls option</span></div>
+        <div class="wc-note"><span class="wc-stage">⚽ QF</span>1 match · ~22:00 CET</div>
       </div>
     </div>
   </div>
@@ -1126,6 +1157,7 @@ body {
         <div class="d-title">Zell am See → Pfronten · Emma pre-meet</div>
         <div class="d-desc">2 hr drive west. Arrive for Emma's pre-wedding gathering. Settle in. Neuschwanstein 20 min away if energy allows.</div>
         <div class="drive-tag">🚗 2h · Zell am See → Pfronten</div>
+        <div class="wc-note"><span class="wc-stage">⚽ QF</span>1 match · ~22:00 CET</div>
       </div>
     </div>
     <div class="day wed-day">
@@ -1134,6 +1166,7 @@ body {
         <span class="badge b-wedding">Wedding Day 🎉</span>
         <div class="d-title">Emma's wedding — Pfronten</div>
         <div class="d-desc">The whole reason you're here. Enjoy every single minute.</div>
+        <div class="wc-note"><span class="wc-stage">⚽ QF</span>2 matches · skip · wedding day</div>
       </div>
     </div>
     <div class="day wed-day">
@@ -1158,6 +1191,7 @@ body {
         <div class="d-title">Final day with Emma & friends · Allgäu</div>
         <div class="d-desc">Last day with the wedding group. Neuschwanstein, Füssen old town, Walchensee lake, Allgäu valley drives.</div>
         <div class="hls"><span class="hl">Neuschwanstein castle</span><span class="hl">Füssen old town</span><span class="hl lake">Walchensee lake</span><span class="hl">Allgäu valleys</span></div>
+        <div class="wc-note"><span class="wc-stage">⚽ SF 1</span>~21:00 CET · big one</div>
       </div>
     </div>
   </div>
@@ -1187,6 +1221,7 @@ body {
         <div class="d-desc">Drive Pfronten to St Moritz via Innsbruck and the Inn Valley — easiest Alpine route, avoids technical passes. Park car at St Moritz station paid parking. Car stays here overnight and all of tomorrow. Check into B&B River Inn.</div>
         <div class="drive-tag">🚗 ~3h 30m · Pfronten → St Moritz via Innsbruck/Landeck</div>
         <div class="note-box amber"><strong>Car logistics — important</strong>Park at St Moritz station Jul 15 evening. Car stays here all of Jul 16. You return by regional train Jul 17 morning to collect it before driving to Nalles.</div>
+        <div class="wc-note"><span class="wc-stage">⚽ SF 2</span>~21:00 CET · big one</div>
       </div>
     </div>
   </div>
@@ -1270,6 +1305,7 @@ body {
         <div class="d-desc">Drive from Nalles through the Dolomites to Villanova. Mosigo lake is a short walk from the chalet. Settle in, afternoon at the lake.</div>
         <div class="drive-tag">🚗 ~2h · Nalles → Villanova via Dolomites</div>
         <div class="hls"><span class="hl lake">Mosigo Lake arrive</span><span class="hl">Children's playground</span></div>
+        <div class="wc-note"><span class="wc-stage">⚽ 3rd place</span>~21:00 CET</div>
       </div>
     </div>
     <div class="day lakes-day">
@@ -1279,6 +1315,7 @@ body {
         <div class="d-title">Mosigo Lake · local explore · no driving</div>
         <div class="d-desc">Morning at Mosigo Lake — flat circuit walk, playground for Isabel, café. Explore Villanova and San Vito di Cadore village (5 min). Relax and settle in properly after a big travel week.</div>
         <div class="hls"><span class="hl lake">Mosigo Lake morning</span><span class="hl">San Vito di Cadore</span><span class="hl">Rest & settle</span></div>
+        <div class="wc-note wc-final"><span class="wc-stage">⚽ FINAL 🏆</span>~21:00 CET · MetLife · perfect rest-day evening</div>
       </div>
     </div>
     <div class="day train-day">
