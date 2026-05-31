@@ -608,6 +608,73 @@ body {
   font-weight: 500;
 }
 
+/* ── LOUNGE BLOCK ── */
+.lounge-block {
+  margin-top: 8px;
+  border: 1px solid rgba(184,134,11,.22);
+  border-radius: 11px;
+  overflow: hidden;
+  background: var(--amber-bg);
+}
+
+.lounge-block-hdr {
+  font-family: 'DM Mono', monospace;
+  font-size: 9px;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: var(--amber);
+  padding: 5px 11px 4px;
+  border-bottom: 1px solid rgba(184,134,11,.16);
+  font-weight: 500;
+}
+
+.lounge-row {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  padding: 5px 11px;
+  border-bottom: 1px solid rgba(184,134,11,.1);
+  font-size: 12px;
+}
+
+.lounge-row:last-child { border-bottom: none; }
+
+.lounge-name {
+  font-weight: 500;
+  color: var(--ink);
+  white-space: nowrap;
+}
+
+.lounge-detail {
+  color: var(--ink-light);
+  font-size: 11.5px;
+  flex: 1;
+}
+
+.lounge-pass {
+  font-family: 'DM Mono', monospace;
+  font-size: 9.5px;
+  color: var(--amber);
+  white-space: nowrap;
+  letter-spacing: .03em;
+}
+
+.lounge-arrive {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-family: 'DM Mono', monospace;
+  font-size: 10px;
+  color: var(--purple);
+  background: var(--purple-bg);
+  border: 1px solid rgba(61,45,112,.18);
+  padding: 3px 10px;
+  border-radius: 999px;
+  align-self: flex-start;
+  margin-top: 4px;
+  letter-spacing: .04em;
+}
+
 /* ── SUMMARY ── */
 .summary {
   display: grid;
@@ -985,7 +1052,21 @@ body {
       <div class="day-right">
         <span class="badge b-fly">Depart</span>
         <div class="d-title">Melbourne 1:30pm → Bangkok 8pm → Munich 7:05am</div>
-        <div class="d-desc">Depart MEL 1:30pm. Arrive Bangkok 8pm. Connecting flight departs 12:50am. Arrive Munich 7:05am Saturday July 4. Transit Bangkok — no overnight, no hotel needed.</div>
+        <div class="d-desc">Depart MEL 1:30pm T2. Arrive Bangkok 8pm. Connecting flight departs 12:50am. Arrive Munich 7:05am Saturday July 4. Transit Bangkok — no overnight, no hotel needed.</div>
+        <div class="lounge-arrive">🕙 Arrive airport by 10:00am · 3.5h before departure</div>
+        <div class="lounge-block">
+          <div class="lounge-block-hdr">🛋 Melbourne T2 · Lounges</div>
+          <div class="lounge-row">
+            <span class="lounge-name">Amex Centurion Lounge</span>
+            <span class="lounge-detail">T2 post-security · primary pick · à la carte dining, family room, showers</span>
+            <span class="lounge-pass">Qantas Amex card</span>
+          </div>
+          <div class="lounge-row">
+            <span class="lounge-name">Plaza Premium</span>
+            <span class="lounge-detail">T2 post-security · backup if Centurion is at capacity</span>
+            <span class="lounge-pass">Amex LoungeKey</span>
+          </div>
+        </div>
         <div class="drive-tag fly">✈ 9.5h MEL→BKK · 11h 15m BKK→MUC</div>
       </div>
     </div>
@@ -1353,8 +1434,27 @@ body {
       <div class="day-left"><div class="d-num">25</div><div class="d-mon">Jul</div><div class="d-wd">Sat</div></div>
       <div class="day-right">
         <span class="badge b-fly">Fly</span>
-        <div class="d-title">Collect car from Galeria · drive to Munich Airport · fly Munich → Bangkok</div>
-        <div class="d-desc">Walk to Galeria München, collect hire car, drive to Munich Airport, return car. Check in. Fly Munich → Bangkok.</div>
+        <div class="d-title">Collect car from Galeria · drive to Munich Airport · fly Munich → Bangkok · 2:25pm T2</div>
+        <div class="d-desc">Walk to Galeria München, collect hire car, drive to Munich Airport, return car. Check in. Fly Munich → Bangkok 2:25pm from T2.</div>
+        <div class="lounge-arrive">🕙 Arrive airport by 10:30am · 4h before departure</div>
+        <div class="lounge-block">
+          <div class="lounge-block-hdr">🛋 Munich T2 · Lounges</div>
+          <div class="lounge-row">
+            <span class="lounge-name">No LoungeKey/Priority Pass in T2</span>
+            <span class="lounge-detail">T2 is Lufthansa/Star Alliance only — status or LH ticket required</span>
+            <span class="lounge-pass">N/A</span>
+          </div>
+          <div class="lounge-row">
+            <span class="lounge-name">Airport Lounge World · T1</span>
+            <span class="lounge-detail">LoungeKey accessible · but requires airside shuttle from T2 (~30–45 min round trip) · not worth it with kids</span>
+            <span class="lounge-pass">Amex LoungeKey</span>
+          </div>
+          <div class="lounge-row">
+            <span class="lounge-name">LoungePair pay-per-use</span>
+            <span class="lounge-detail">~€56/person · book via loungepair.com · no advance date needed</span>
+            <span class="lounge-pass">Pay at door</span>
+          </div>
+        </div>
         <div class="drive-tag fly">✈ Munich → Bangkok</div>
       </div>
     </div>
