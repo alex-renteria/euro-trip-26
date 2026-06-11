@@ -201,6 +201,45 @@ body {
 
 .sidebar-map-btn:hover { background: rgba(184,134,11,.25); }
 
+/* ── MOBILE MENU TOGGLE (hidden on desktop) ── */
+.menu-toggle {
+  display: none;
+  position: fixed;
+  top: 1rem; left: 1rem;
+  z-index: 200;
+  width: 44px; height: 44px;
+  border-radius: 11px;
+  background: var(--ink);
+  border: 1px solid rgba(245,240,232,.16);
+  cursor: pointer;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  padding: 0;
+}
+
+.menu-toggle span {
+  display: block;
+  width: 18px; height: 1.5px;
+  background: rgba(245,240,232,.85);
+  transition: transform .25s, opacity .2s;
+}
+
+.menu-toggle.open span:nth-child(1) { transform: translateY(5.5px) rotate(45deg); }
+.menu-toggle.open span:nth-child(2) { opacity: 0; }
+.menu-toggle.open span:nth-child(3) { transform: translateY(-5.5px) rotate(-45deg); }
+
+.sidebar-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(24,22,15,.5);
+  z-index: 99;
+  opacity: 0;
+  transition: opacity .25s;
+}
+
 /* ── MAIN ── */
 .main {
   margin-left: var(--sidebar-w);
@@ -908,9 +947,18 @@ body {
 /* ── MOBILE ── */
 @media (max-width: 768px) {
   :root { --sidebar-w: 0px; }
-  .sidebar { display: none; }
+  .menu-toggle { display: flex; }
+  .sidebar {
+    width: 280px;
+    max-width: 85vw;
+    transform: translateX(-100%);
+    transition: transform .3s ease;
+  }
+  .sidebar.open { transform: translateX(0); box-shadow: 0 0 40px rgba(0,0,0,.45); }
+  .sidebar-overlay.show { display: block; opacity: 1; }
   .main { margin-left: 0; }
   .header, .content, #map-section { padding: 2rem 1.25rem; }
+  .header { padding-top: 4.75rem; }
   .summary { grid-template-columns: repeat(3,1fr); }
   .log-grid { grid-template-columns: 1fr; }
   .log-item { border-right: none !important; }
@@ -922,6 +970,12 @@ body {
 </style>
 </head>
 <body>
+
+<!-- ── MOBILE MENU TOGGLE ── -->
+<button class="menu-toggle" onclick="toggleMenu()" aria-label="Toggle navigation menu">
+  <span></span><span></span><span></span>
+</button>
+<div class="sidebar-overlay" onclick="closeMenu()"></div>
 
 <div class="layout">
 
@@ -1621,6 +1675,22 @@ function highlight(id) {
     setTimeout(() => el.classList.remove('highlighted'), 2000);
   }
 }
+
+// ── Mobile drawer ──
+function toggleMenu() {
+  const open = document.querySelector('.sidebar').classList.toggle('open');
+  document.querySelector('.menu-toggle').classList.toggle('open', open);
+  document.querySelector('.sidebar-overlay').classList.toggle('show', open);
+}
+
+function closeMenu() {
+  document.querySelector('.sidebar').classList.remove('open');
+  document.querySelector('.menu-toggle').classList.remove('open');
+  document.querySelector('.sidebar-overlay').classList.remove('show');
+}
+
+// Close the drawer after tapping any nav link
+document.querySelectorAll('.sidebar .nav-item').forEach(item => item.addEventListener('click', closeMenu));
 
 // Active nav highlighting on scroll
 const observer = new IntersectionObserver((entries) => {
