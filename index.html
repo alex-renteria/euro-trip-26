@@ -604,6 +604,26 @@ body {
 .drive-tag.fly { color: var(--purple); background: var(--purple-bg); }
 .drive-tag.train { color: var(--green); background: var(--green-bg); }
 
+/* ── TEMP TAG ── */
+.temp-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  font-family: 'DM Mono', monospace;
+  font-size: 10px;
+  color: var(--ink-mid);
+  background: rgba(30,63,107,.06);
+  border: 1px solid rgba(30,63,107,.12);
+  padding: 3px 11px;
+  border-radius: 999px;
+  align-self: flex-start;
+  margin-top: 2px;
+  letter-spacing: .03em;
+}
+.temp-tag .temp-hi { color: var(--amber); font-weight: 500; }
+.temp-tag .temp-lo { color: var(--blue); }
+.temp-tag .temp-src { color: var(--ink-faint); font-size: 8.5px; letter-spacing: .06em; }
+
 .hls {
   display: flex;
   flex-wrap: wrap;
@@ -1855,6 +1875,54 @@ document.querySelectorAll('.base[id]').forEach(el => observer.observe(el));
       $('st-count-sub').textContent = 'Drive or fly day';
     }
   }
+})();
+
+// ── DAILY TEMPERATURES ──
+// Historical July averages (°C). Update to real forecasts closer to the trip.
+// hi = daytime max, lo = overnight min, src = 'hist' (historical) or 'fcst' (forecast)
+const TEMPS = {
+  '3-Jul':  { hi: 13, lo: 7,  note: 'MEL winter' },   // Melbourne July
+  '4-Jul':  { hi: 23, lo: 11, note: 'Bavaria' },
+  '5-Jul':  { hi: 24, lo: 11, note: 'Bad Reichenhall' },
+  '6-Jul':  { hi: 24, lo: 11, note: 'Bad Reichenhall' },
+  '7-Jul':  { hi: 23, lo: 11, note: 'Hallstatt → Zell' },
+  '8-Jul':  { hi: 22, lo: 10, note: 'Zell am See' },
+  '9-Jul':  { hi: 22, lo: 10, note: 'Zell am See' },
+  '10-Jul': { hi: 22, lo: 11, note: 'Pfronten 870m' },
+  '11-Jul': { hi: 22, lo: 11, note: 'Pfronten' },
+  '12-Jul': { hi: 22, lo: 11, note: 'Pfronten' },
+  '13-Jul': { hi: 22, lo: 11, note: 'Pfronten' },
+  '14-Jul': { hi: 22, lo: 11, note: 'Pfronten' },
+  '15-Jul': { hi: 18, lo: 6,  note: 'St Moritz 1800m' },
+  '16-Jul': { hi: 28, lo: 15, note: 'Tirano 450m' },
+  '17-Jul': { hi: 30, lo: 16, note: 'Nalles / Merano' },
+  '18-Jul': { hi: 23, lo: 12, note: 'Villanova 900m' },
+  '19-Jul': { hi: 23, lo: 12, note: 'Villanova' },
+  '20-Jul': { hi: 23, lo: 12, note: 'Villanova' },
+  '21-Jul': { hi: 23, lo: 12, note: 'Villanova' },
+  '22-Jul': { hi: 23, lo: 12, note: 'Villanova' },
+  '23-Jul': { hi: 25, lo: 14, note: 'Munich' },
+  '24-Jul': { hi: 25, lo: 14, note: 'Munich' },
+  '25-Jul': { hi: 25, lo: 14, note: 'Munich' },
+  '26-Jul': { hi: 33, lo: 26, note: 'Bangkok rainy season' },
+  '27-Jul': { hi: 13, lo: 7,  note: 'MEL winter' },
+};
+
+(function injectTemps() {
+  document.querySelectorAll('.day').forEach(day => {
+    const num = day.querySelector('.d-num');
+    const mon = day.querySelector('.d-mon');
+    if (!num || !mon) return;
+    const key = num.textContent.trim() + '-' + mon.textContent.trim();
+    const t = TEMPS[key];
+    if (!t) return;
+    const tag = document.createElement('div');
+    tag.className = 'temp-tag';
+    tag.innerHTML = `🌡 <span class="temp-hi">${t.hi}°</span><span class="temp-lo">&thinsp;/ ${t.lo}°</span><span class="temp-src">&nbsp;hist avg</span>`;
+    tag.title = t.note;
+    const right = day.querySelector('.day-right');
+    if (right) right.appendChild(tag);
+  });
 })();
 </script>
 </body>
