@@ -423,13 +423,21 @@ body {
   width: 40px; height: 40px;
   border-radius: 11px;
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
-  font-family: 'DM Mono', monospace;
-  font-size: 11px;
-  font-weight: 500;
   flex-shrink: 0;
-  letter-spacing: .04em;
+  gap: 1px;
+}
+.b-icon-letter {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 1;
+}
+.b-icon-flag {
+  font-size: 11px;
+  line-height: 1;
 }
 
 .b-name {
@@ -1021,47 +1029,47 @@ body {
     <div class="nav-section-label">Bavaria & Austrian Lakes</div>
     <a class="nav-item" href="#base-glockenalm" onclick="highlight('base-glockenalm')">
       <div class="nav-dot" style="border-color:#1E3F6B;background:#0F2240"></div>
-      <div class="nav-text"><div class="nav-name">Glockenalm</div><div class="nav-dates">Sat Jul 4</div></div>
+      <div class="nav-text"><div class="nav-name">A · Glockenalm</div><div class="nav-dates">Sat Jul 4</div></div>
     </a>
     <a class="nav-item" href="#base-reichenhall" onclick="highlight('base-reichenhall')">
       <div class="nav-dot" style="border-color:#1E3F6B;background:#0F2240"></div>
-      <div class="nav-text"><div class="nav-name">ibis Bad Reichenhall</div><div class="nav-dates">Sun Jul 5 – Tue Jul 7</div></div>
+      <div class="nav-text"><div class="nav-name">B · ibis Bad Reichenhall</div><div class="nav-dates">Sun Jul 5 – Tue Jul 7</div></div>
     </a>
     <a class="nav-item" href="#base-zell" onclick="highlight('base-zell')">
       <div class="nav-dot" style="border-color:#1A5C5C;background:#0F3535"></div>
-      <div class="nav-text"><div class="nav-name">St George · Zell am See</div><div class="nav-dates">Tue Jul 7 – Fri Jul 10</div></div>
+      <div class="nav-text"><div class="nav-name">C · St George · Zell am See</div><div class="nav-dates">Tue Jul 7 – Fri Jul 10</div></div>
     </a>
 
     <div class="nav-section-label">Wedding</div>
     <a class="nav-item" href="#base-pfronten" onclick="highlight('base-pfronten')">
       <div class="nav-dot" style="border-color:#7A1E1E;background:#4A1010"></div>
-      <div class="nav-text"><div class="nav-name">Wedding Venue · Pfronten</div><div class="nav-dates">Fri Jul 10 – Wed Jul 15</div></div>
+      <div class="nav-text"><div class="nav-name">D · Wedding Venue · Pfronten</div><div class="nav-dates">Fri Jul 10 – Wed Jul 15</div></div>
     </a>
 
     <div class="nav-section-label">Switzerland</div>
     <a class="nav-item" href="#base-stmoritz" onclick="highlight('base-stmoritz')">
       <div class="nav-dot" style="border-color:#2A5C45;background:#163525"></div>
-      <div class="nav-text"><div class="nav-name">B&B River Inn · St Moritz</div><div class="nav-dates">Wed Jul 15</div></div>
+      <div class="nav-text"><div class="nav-name">E · B&B River Inn · St Moritz</div><div class="nav-dates">Wed Jul 15</div></div>
     </a>
     <a class="nav-item" href="#base-tirano" onclick="highlight('base-tirano')">
       <div class="nav-dot" style="border-color:#7A4E10;background:#4A2E08"></div>
-      <div class="nav-text"><div class="nav-name">Bernina View · Tirano 🚂</div><div class="nav-dates">Thu Jul 16</div></div>
+      <div class="nav-text"><div class="nav-name">F · Bernina View · Tirano 🚂</div><div class="nav-dates">Thu Jul 16</div></div>
     </a>
 
     <div class="nav-section-label">Italy · Dolomites</div>
     <a class="nav-item" href="#base-nalles" onclick="highlight('base-nalles')">
       <div class="nav-dot" style="border-color:#7A4E10;background:#4A2E08"></div>
-      <div class="nav-text"><div class="nav-name">St. Vigilhof · Nalles</div><div class="nav-dates">Fri Jul 17</div></div>
+      <div class="nav-text"><div class="nav-name">G · St. Vigilhof · Nalles</div><div class="nav-dates">Fri Jul 17</div></div>
     </a>
     <a class="nav-item" href="#base-villanova" onclick="highlight('base-villanova')">
       <div class="nav-dot" style="border-color:#B8860B;background:#6B4E07"></div>
-      <div class="nav-text"><div class="nav-name">Chalet · Villanova ⭐</div><div class="nav-dates">Sat Jul 18 – Thu Jul 23</div></div>
+      <div class="nav-text"><div class="nav-name">H · Chalet · Villanova ⭐</div><div class="nav-dates">Sat Jul 18 – Thu Jul 23</div></div>
     </a>
 
     <div class="nav-section-label">Return</div>
     <a class="nav-item" href="#base-munich" onclick="highlight('base-munich')">
       <div class="nav-dot" style="border-color:#1E3F6B;background:#0F2240"></div>
-      <div class="nav-text"><div class="nav-name">Emma's House · Munich</div><div class="nav-dates">Thu Jul 23 – Sat Jul 25</div></div>
+      <div class="nav-text"><div class="nav-name">I · Emma's House · Munich</div><div class="nav-dates">Thu Jul 23 – Sat Jul 25</div></div>
     </a>
     <a class="nav-item" href="#base-bangkok" onclick="highlight('base-bangkok')">
       <div class="nav-dot" style="border-color:#3D2D70;background:#221A42"></div>
@@ -1178,7 +1186,7 @@ body {
 
 <div class="base" id="base-glockenalm">
   <div class="base-hdr" onclick="toggleBase('base-glockenalm')">
-    <div class="b-icon" style="background:var(--blue-bg);color:var(--blue)">DE</div>
+    <div class="b-icon" style="background:var(--blue-bg);color:var(--blue)"><span class="b-icon-letter">A</span><span class="b-icon-flag">🇩🇪</span></div>
     <div>
       <div class="b-name">Glockenalm — Arrival Night</div>
       <div class="b-addr">Bavaria · Hannah's hen's night · all together</div>
@@ -1205,7 +1213,7 @@ body {
 
 <div class="base" id="base-reichenhall">
   <div class="base-hdr" onclick="toggleBase('base-reichenhall')">
-    <div class="b-icon" style="background:var(--blue-bg);color:var(--blue)">DE</div>
+    <div class="b-icon" style="background:var(--blue-bg);color:var(--blue)"><span class="b-icon-letter">B</span><span class="b-icon-flag">🇩🇪</span></div>
     <div>
       <div class="b-name">ibis Styles Bad Reichenhall</div>
       <div class="b-addr">Ludwigstrasse 35, 83435 Bad Reichenhall · 20 min from Königssee · 30 min from Salzburg</div>
@@ -1242,7 +1250,7 @@ body {
 
 <div class="base" id="base-zell">
   <div class="base-hdr" onclick="toggleBase('base-zell')">
-    <div class="b-icon" style="background:var(--teal-bg);color:var(--teal)">AT</div>
+    <div class="b-icon" style="background:var(--teal-bg);color:var(--teal)"><span class="b-icon-letter">C</span><span class="b-icon-flag">🇦🇹</span></div>
     <div>
       <div class="b-name">Hotel St George — Zell am See</div>
       <div class="b-addr">Zell am See, Salzburger Land, Austria · lakeside alpine town</div>
@@ -1294,7 +1302,7 @@ body {
 
 <div class="base wedding-base" id="base-pfronten">
   <div class="base-hdr" onclick="toggleBase('base-pfronten')">
-    <div class="b-icon" style="background:var(--red-bg);color:var(--red)">DE</div>
+    <div class="b-icon" style="background:var(--red-bg);color:var(--red)"><span class="b-icon-letter">D</span><span class="b-icon-flag">🇩🇪</span></div>
     <div>
       <div class="b-name">Wedding Venue — Pfronten im Allgäu</div>
       <div class="b-addr">Vilstalstraße 2, 87459 Pfronten · Allgäu Alps · Bavaria</div>
@@ -1357,7 +1365,7 @@ body {
 
 <div class="base" id="base-stmoritz">
   <div class="base-hdr" onclick="toggleBase('base-stmoritz')">
-    <div class="b-icon" style="background:var(--green-bg);color:var(--green)">CH</div>
+    <div class="b-icon" style="background:var(--green-bg);color:var(--green)"><span class="b-icon-letter">E</span><span class="b-icon-flag">🇨🇭</span></div>
     <div>
       <div class="b-name">B&B River Inn — St. Moritz</div>
       <div class="b-addr">48 Via San Gian, 7500 St. Moritz, Switzerland · Confirmation: 5286292459</div>
@@ -1384,7 +1392,7 @@ body {
 
 <div class="base star" id="base-tirano">
   <div class="base-hdr" onclick="toggleBase('base-tirano')">
-    <div class="b-icon" style="background:var(--amber-bg);color:var(--amber)">IT</div>
+    <div class="b-icon" style="background:var(--amber-bg);color:var(--amber)"><span class="b-icon-letter">F</span><span class="b-icon-flag">🇮🇹</span></div>
     <div>
       <div class="b-name">Bernina View Airbnb — Tirano ⭐</div>
       <div class="b-addr">Viale Italia 101, Quinto Piano, 23037 Tirano, Italy</div>
@@ -1414,7 +1422,7 @@ body {
 
 <div class="base" id="base-nalles">
   <div class="base-hdr" onclick="toggleBase('base-nalles')">
-    <div class="b-icon" style="background:var(--amber-bg);color:var(--amber)">IT</div>
+    <div class="b-icon" style="background:var(--amber-bg);color:var(--amber)"><span class="b-icon-letter">G</span><span class="b-icon-flag">🇮🇹</span></div>
     <div>
       <div class="b-name">St. Vigilhof — Nalles</div>
       <div class="b-addr">Via St. Vigilio 29/A, 39010 Nalles, Italy · Confirmation: 5421204510 · Checkin 2pm · Checkout 10am</div>
@@ -1441,7 +1449,7 @@ body {
 
 <div class="base star" id="base-villanova">
   <div class="base-hdr" onclick="toggleBase('base-villanova')">
-    <div class="b-icon" style="background:var(--amber-bg);color:var(--amber)">IT</div>
+    <div class="b-icon" style="background:var(--amber-bg);color:var(--amber)"><span class="b-icon-letter">H</span><span class="b-icon-flag">🇮🇹</span></div>
     <div>
       <div class="b-name">Chalet Vicino al Bosco — Villanova ⭐</div>
       <div class="b-addr">Via La Vares, 32040 Villanova BL, Veneto · 15 min from Cortina d'Ampezzo</div>
@@ -1511,7 +1519,7 @@ body {
 
 <div class="base" id="base-munich">
   <div class="base-hdr" onclick="toggleBase('base-munich')">
-    <div class="b-icon" style="background:var(--blue-bg);color:var(--blue)">DE</div>
+    <div class="b-icon" style="background:var(--blue-bg);color:var(--blue)"><span class="b-icon-letter">I</span><span class="b-icon-flag">🇩🇪</span></div>
     <div>
       <div class="b-name">Emma's House — Munich</div>
       <div class="b-addr">Ainmillerstraße 27, 80801 München · car parked: Galeria München</div>
@@ -1770,20 +1778,20 @@ document.querySelectorAll('.base[id]').forEach(el => observer.observe(el));
     const isNext = i === nextIdx;
     const isPast   = onTrip && today >= stop.checkout;
     const isFuture = onTrip && !isHere && !isNext && !isPast;
-    const num  = i + 1;
+    const letter = String.fromCharCode(65 + i);
     const size = isHere ? 26 : 22;
     const opacity = isPast ? 0.35 : isFuture ? 0.6 : 1;
     const extraClass = isHere ? 'marker-num-here' : '';
-    const fontSize = size <= 22 ? '10px' : '11px';
+    const fontSize = size <= 22 ? '11px' : '12px';
 
     const popup = `
-      <div class="map-popup-name">${stop.name}</div>
+      <div class="map-popup-name">${letter} · ${stop.name}</div>
       <div class="map-popup-place">${stop.place} · ${stop.dates}</div>
       ${isHere ? '<span class="map-popup-badge" style="background:#F5E8E8;color:#7A1E1E">You are here</span>' : ''}
       ${isNext ? '<span class="map-popup-badge" style="background:#E8EFF7;color:#1E3F6B">Next stop</span>' : ''}
     `;
 
-    const html = `<div class="marker-num ${extraClass}" style="width:${size}px;height:${size}px;background:${stop.bg};border-color:${stop.border};opacity:${opacity};font-size:${fontSize}">${num}</div>`;
+    const html = `<div class="marker-num ${extraClass}" style="width:${size}px;height:${size}px;background:${stop.bg};border-color:${stop.border};opacity:${opacity};font-size:${fontSize}">${letter}</div>`;
     const icon = L.divIcon({ className: '', html, iconSize: [size,size], iconAnchor: [size/2,size/2], popupAnchor: [0,-(size/2+6)] });
 
     L.marker([stop.lat, stop.lng], { icon })
