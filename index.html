@@ -612,6 +612,12 @@ body {
 .drive-tag.fly { color: var(--purple); background: var(--purple-bg); }
 .drive-tag.train { color: var(--green); background: var(--green-bg); }
 
+/* ── EVENT LIST ── */
+.ev-list { margin-top: 7px; display: flex; flex-direction: column; gap: 4px; }
+.ev-row { display: flex; align-items: baseline; gap: 9px; font-size: 12.5px; }
+.ev-time { font-family: 'DM Mono', monospace; font-size: 10px; color: var(--ink-mid); min-width: 48px; flex-shrink: 0; }
+.ev-who { font-size: 10px; color: var(--ink-faint); }
+
 /* ── TEMP TAG ── */
 .temp-tag {
   display: inline-flex;
@@ -1205,6 +1211,9 @@ body {
         <div class="d-desc">Pick up hire car at MUC — SUV, 2 child seats pre-booked, cross-border AT + IT + CH confirmed in writing. Drive to Glockenalm. Settle in. Hannah's hen's night. Early night for everyone.</div>
         <div class="drive-tag">🚗 ~1h from Munich Airport</div>
         <div class="note-box amber"><strong>Hannah — hen's night</strong>Evening celebration. Alex holds down the fort with the kids.</div>
+        <div class="ev-list">
+          <div class="ev-row"><span class="ev-time">7:00pm</span><span>Campsite dinner & games</span></div>
+        </div>
         <div class="wc-note"><span class="wc-stage">⚽ R16</span>2 matches · ~21:00 & 03:00 CET</div>
       </div>
     </div>
@@ -1231,6 +1240,10 @@ body {
         <div class="d-title">Glockenalm → ibis Bad Reichenhall</div>
         <div class="d-desc">Short drive to Bad Reichenhall. Check in, walk the historic spa promenade, easy lunch. Recovery day after the long-haul.</div>
         <div class="drive-tag">🚗 Short drive</div>
+        <div class="ev-list">
+          <div class="ev-row"><span class="ev-time">10:00am</span><span>Breakfast with the girls <span class="ev-who">· Hannah</span></span></div>
+          <div class="ev-row"><span class="ev-time">after</span><span>Drive & check in at ibis</span></div>
+        </div>
         <div class="wc-note"><span class="wc-stage">⚽ R16</span>2 matches · ~21:00 & 03:00 CET</div>
       </div>
     </div>
