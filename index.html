@@ -423,13 +423,21 @@ body {
   width: 40px; height: 40px;
   border-radius: 11px;
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
-  font-family: 'Cormorant Garamond', serif;
-  font-size: 18px;
-  font-weight: 400;
   flex-shrink: 0;
-  letter-spacing: 0;
+  gap: 1px;
+}
+.b-icon-letter {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 1;
+}
+.b-icon-flag {
+  font-size: 11px;
+  line-height: 1;
 }
 
 .b-name {
@@ -1178,7 +1186,7 @@ body {
 
 <div class="base" id="base-glockenalm">
   <div class="base-hdr" onclick="toggleBase('base-glockenalm')">
-    <div class="b-icon" style="background:var(--blue-bg);color:var(--blue)">A</div>
+    <div class="b-icon" style="background:var(--blue-bg);color:var(--blue)"><span class="b-icon-letter">A</span><span class="b-icon-flag">🇩🇪</span></div>
     <div>
       <div class="b-name">Glockenalm — Arrival Night</div>
       <div class="b-addr">Bavaria · Hannah's hen's night · all together</div>
@@ -1205,7 +1213,7 @@ body {
 
 <div class="base" id="base-reichenhall">
   <div class="base-hdr" onclick="toggleBase('base-reichenhall')">
-    <div class="b-icon" style="background:var(--blue-bg);color:var(--blue)">B</div>
+    <div class="b-icon" style="background:var(--blue-bg);color:var(--blue)"><span class="b-icon-letter">B</span><span class="b-icon-flag">🇩🇪</span></div>
     <div>
       <div class="b-name">ibis Styles Bad Reichenhall</div>
       <div class="b-addr">Ludwigstrasse 35, 83435 Bad Reichenhall · 20 min from Königssee · 30 min from Salzburg</div>
@@ -1242,7 +1250,7 @@ body {
 
 <div class="base" id="base-zell">
   <div class="base-hdr" onclick="toggleBase('base-zell')">
-    <div class="b-icon" style="background:var(--teal-bg);color:var(--teal)">C</div>
+    <div class="b-icon" style="background:var(--teal-bg);color:var(--teal)"><span class="b-icon-letter">C</span><span class="b-icon-flag">🇦🇹</span></div>
     <div>
       <div class="b-name">Hotel St George — Zell am See</div>
       <div class="b-addr">Zell am See, Salzburger Land, Austria · lakeside alpine town</div>
@@ -1294,7 +1302,7 @@ body {
 
 <div class="base wedding-base" id="base-pfronten">
   <div class="base-hdr" onclick="toggleBase('base-pfronten')">
-    <div class="b-icon" style="background:var(--red-bg);color:var(--red)">D</div>
+    <div class="b-icon" style="background:var(--red-bg);color:var(--red)"><span class="b-icon-letter">D</span><span class="b-icon-flag">🇩🇪</span></div>
     <div>
       <div class="b-name">Wedding Venue — Pfronten im Allgäu</div>
       <div class="b-addr">Vilstalstraße 2, 87459 Pfronten · Allgäu Alps · Bavaria</div>
@@ -1357,7 +1365,7 @@ body {
 
 <div class="base" id="base-stmoritz">
   <div class="base-hdr" onclick="toggleBase('base-stmoritz')">
-    <div class="b-icon" style="background:var(--green-bg);color:var(--green)">E</div>
+    <div class="b-icon" style="background:var(--green-bg);color:var(--green)"><span class="b-icon-letter">E</span><span class="b-icon-flag">🇨🇭</span></div>
     <div>
       <div class="b-name">B&B River Inn — St. Moritz</div>
       <div class="b-addr">48 Via San Gian, 7500 St. Moritz, Switzerland · Confirmation: 5286292459</div>
@@ -1384,7 +1392,7 @@ body {
 
 <div class="base star" id="base-tirano">
   <div class="base-hdr" onclick="toggleBase('base-tirano')">
-    <div class="b-icon" style="background:var(--amber-bg);color:var(--amber)">F</div>
+    <div class="b-icon" style="background:var(--amber-bg);color:var(--amber)"><span class="b-icon-letter">F</span><span class="b-icon-flag">🇮🇹</span></div>
     <div>
       <div class="b-name">Bernina View Airbnb — Tirano ⭐</div>
       <div class="b-addr">Viale Italia 101, Quinto Piano, 23037 Tirano, Italy</div>
@@ -1414,7 +1422,7 @@ body {
 
 <div class="base" id="base-nalles">
   <div class="base-hdr" onclick="toggleBase('base-nalles')">
-    <div class="b-icon" style="background:var(--amber-bg);color:var(--amber)">G</div>
+    <div class="b-icon" style="background:var(--amber-bg);color:var(--amber)"><span class="b-icon-letter">G</span><span class="b-icon-flag">🇮🇹</span></div>
     <div>
       <div class="b-name">St. Vigilhof — Nalles</div>
       <div class="b-addr">Via St. Vigilio 29/A, 39010 Nalles, Italy · Confirmation: 5421204510 · Checkin 2pm · Checkout 10am</div>
@@ -1441,7 +1449,7 @@ body {
 
 <div class="base star" id="base-villanova">
   <div class="base-hdr" onclick="toggleBase('base-villanova')">
-    <div class="b-icon" style="background:var(--amber-bg);color:var(--amber)">H</div>
+    <div class="b-icon" style="background:var(--amber-bg);color:var(--amber)"><span class="b-icon-letter">H</span><span class="b-icon-flag">🇮🇹</span></div>
     <div>
       <div class="b-name">Chalet Vicino al Bosco — Villanova ⭐</div>
       <div class="b-addr">Via La Vares, 32040 Villanova BL, Veneto · 15 min from Cortina d'Ampezzo</div>
@@ -1511,7 +1519,7 @@ body {
 
 <div class="base" id="base-munich">
   <div class="base-hdr" onclick="toggleBase('base-munich')">
-    <div class="b-icon" style="background:var(--blue-bg);color:var(--blue)">I</div>
+    <div class="b-icon" style="background:var(--blue-bg);color:var(--blue)"><span class="b-icon-letter">I</span><span class="b-icon-flag">🇩🇪</span></div>
     <div>
       <div class="b-name">Emma's House — Munich</div>
       <div class="b-addr">Ainmillerstraße 27, 80801 München · car parked: Galeria München</div>
