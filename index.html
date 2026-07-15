@@ -1738,6 +1738,15 @@ const observer = new IntersectionObserver((entries) => {
 
 document.querySelectorAll('.base[id]').forEach(el => observer.observe(el));
 
+// Parses 'YYYY-MM-DD' as local midnight (not UTC) so it compares correctly
+// against `today`, which is also local midnight — avoids the trip-status
+// strip and map flipping to the wrong base for hours around each midnight
+// depending on the viewer's UTC offset.
+function parseLocalDate(str) {
+  const [y, m, d] = str.split('-').map(Number);
+  return new Date(y, m - 1, d);
+}
+
 // ── TRIP MAP ──
 (function() {
   const ROUTE = [
@@ -1750,11 +1759,11 @@ document.querySelectorAll('.base[id]').forEach(el => observer.observe(el));
     { id: 'base-nalles',      name: 'St. Vigilhof',           place: 'Nalles · South Tyrol',     dates: 'Jul 17',    lat: 46.552, lng: 11.178, checkin: '2026-07-17', checkout: '2026-07-18', bg: '#4A2E08', border: '#7A4E10' },
     { id: 'base-villanova',   name: 'Chalet Vicino al Bosco', place: 'Villanova · Dolomites',    dates: 'Jul 18–23', lat: 46.449, lng: 12.183, checkin: '2026-07-18', checkout: '2026-07-23', bg: '#6B4E07', border: '#B8860B' },
     { id: 'base-munich',      name: "Emma's House",           place: 'Munich · Germany',         dates: 'Jul 23–25', lat: 48.137, lng: 11.575, checkin: '2026-07-23', checkout: '2026-07-25', bg: '#0F2240', border: '#1E3F6B' },
-  ].map(s => ({ ...s, checkin: new Date(s.checkin), checkout: new Date(s.checkout) }));
+  ].map(s => ({ ...s, checkin: parseLocalDate(s.checkin), checkout: parseLocalDate(s.checkout) }));
 
   const today = new Date(); today.setHours(0,0,0,0);
-  const DEPART = new Date('2026-07-03');
-  const HOME   = new Date('2026-07-27');
+  const DEPART = parseLocalDate('2026-07-03');
+  const HOME   = parseLocalDate('2026-07-27');
   const onTrip = today >= DEPART && today < HOME;
 
   let hereIdx = -1, nextIdx = -1;
@@ -1829,11 +1838,11 @@ document.querySelectorAll('.base[id]').forEach(el => observer.observe(el));
     { name: 'Chalet Vicino al Bosco', place: 'Villanova · Dolomites', checkin: '2026-07-18', checkout: '2026-07-23' },
     { name: "Emma's House", place: 'Munich · Germany', checkin: '2026-07-23', checkout: '2026-07-25' },
     { name: 'Hyatt Regency', place: 'Bangkok · Thailand', checkin: '2026-07-26', checkout: '2026-07-27' },
-  ].map(b => ({ ...b, checkin: new Date(b.checkin), checkout: new Date(b.checkout) }));
+  ].map(b => ({ ...b, checkin: parseLocalDate(b.checkin), checkout: parseLocalDate(b.checkout) }));
 
-  const DEPART = new Date('2026-07-03');
-  const TRANSIT_OUT = new Date('2026-07-03');
-  const HOME = new Date('2026-07-27');
+  const DEPART = parseLocalDate('2026-07-03');
+  const TRANSIT_OUT = parseLocalDate('2026-07-03');
+  const HOME = parseLocalDate('2026-07-27');
 
   const DAYS = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
   const MONTHS = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
